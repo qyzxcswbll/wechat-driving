@@ -1,0 +1,5 @@
+<view class="splash">
+  <view class="splash-icon">🚗</view>
+  <view class="splash-title">平安驾校</view>
+  <text class="splash-sub">加载中...</text>
+</view>

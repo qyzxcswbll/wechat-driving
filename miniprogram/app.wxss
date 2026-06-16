@@ -1,0 +1,22 @@
+page {
+  --primary: #534AB7;
+  --primary-light: #EEEDFE;
+  --primary-text: #3C3489;
+  --primary-muted: #7F77DD;
+  --success: #0F6E56;
+  --success-bg: #E1F5EE;
+  --warn: #BA7517;
+  --warn-bg: #FAEEDA;
+  --danger: #A32D2D;
+  --danger-bg: #FCEBEB;
+  --gray-1: #f5f5f7;
+  --gray-2: #e8e8e8;
+  --gray-3: #ccc;
+  --gray-4: #888;
+  --gray-5: #555;
+  --radius: 10px;
+  --radius-sm: 6px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  color: #1a1a1a;
+  background: var(--gray-1);
+}

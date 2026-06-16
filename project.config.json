@@ -1,0 +1,17 @@
+{
+  "description": "平安驾校预约小程序",
+  "packOptions": { "ignore": [] },
+  "setting": {
+    "urlCheck": true,
+    "es6": true,
+    "postcss": true,
+    "minified": true,
+    "cloud": true
+  },
+  "cloudfunctionRoot": "cloudfunctions/",
+  "compileType": "miniprogram",
+  "libVersion": "3.7.0",
+  "appid": "wx0000000000000000",
+  "projectname": "wechat-driving",
+  "condition": {}
+}

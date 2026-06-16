@@ -1,0 +1,27 @@
+<view class="page" style="padding:16px 16px 70px;">
+  <view style="margin-bottom:12px;">
+    <picker mode="selector" range="{{filters}}" value="{{filterIdx}}" bindchange="onFilter">
+      <view style="font-size:13px;color:#0F6E56;padding:8px 12px;background:#E1F5EE;border-radius:8px;display:inline-block;">📋 {{filters[filterIdx]}} ▾</view>
+    </picker>
+  </view>
+
+  <view wx:for="{{displayList}}" wx:key="_id" style="background:#fff;border-radius:12px;padding:14px;border:1px solid #e8e8e8;margin-bottom:10px;">
+    <view style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+      <text style="font-size:14px;font-weight:500;color:#333;">{{item.nickName}} · {{item.subject}}</text>
+      <status-badge status="{{item.status}}" />
+    </view>
+    <view style="font-size:13px;color:#555;margin-bottom:2px;">📅 {{item.date}} {{item.time}}</view>
+    <view style="font-size:13px;color:#555;margin-bottom:2px;">📱 {{item.phone}}</view>
+    <view wx:if="{{item.remark}}" style="font-size:13px;color:#555;margin-bottom:2px;">💬 {{item.remark}}</view>
+
+    <view wx:if="{{item.status==='pending'}}" style="display:flex;gap:6px;margin-top:10px;">
+      <view style="flex:1;background:#0F6E56;color:#fff;padding:8px;border-radius:6px;text-align:center;font-size:12px;font-weight:500;" bindtap="acceptBooking" data-id="{{item._id}}">✓ 接受</view>
+      <view style="flex:1;background:#A32D2D;color:#fff;padding:8px;border-radius:6px;text-align:center;font-size:12px;font-weight:500;" bindtap="rejectBooking" data-id="{{item._id}}">✗ 拒绝</view>
+      <view style="flex:1;background:#f8f8f8;color:#555;padding:8px;border-radius:6px;text-align:center;font-size:12px;border:1px solid #e8e8e8;" bindtap="callPhone" data-phone="{{item.phone}}">💬 微信</view>
+    </view>
+    <view wx:elif="{{item.status==='rejected' && item.adminReply}}" style="font-size:12px;color:#A32D2D;margin-top:8px;">
+      原因：{{item.adminReply}}
+    </view>
+  </view>
+</view>
+<nav-bar activeTab="bookings" items="{{navItems}}" />

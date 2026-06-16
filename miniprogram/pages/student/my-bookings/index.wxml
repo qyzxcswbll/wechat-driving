@@ -1,0 +1,14 @@
+<view class="page" style="padding:16px 16px 70px;">
+  <view wx:if="{{list.length===0}}" style="text-align:center;padding:60px 0;">
+    <text style="font-size:40px;display:block;margin-bottom:12px;">📋</text>
+    <text style="font-size:14px;color:#888;">暂无预约记录</text>
+  </view>
+  <view wx:for="{{list}}" wx:key="_id" style="background:#fff;border-radius:12px;padding:14px;border:1px solid #e8e8e8;margin-bottom:10px;" bindtap="goDetail" data-id="{{item._id}}">
+    <view style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+      <text style="font-size:14px;font-weight:500;color:#333;">{{item.date}} {{item.time}}</text>
+      <status-badge status="{{item.status}}" />
+    </view>
+    <view style="font-size:13px;color:#666;">{{item.subject}}{{item.remark ? ' · ' + item.remark : ''}}</view>
+  </view>
+</view>
+<nav-bar activeTab="my" items="{{navItems}}" />

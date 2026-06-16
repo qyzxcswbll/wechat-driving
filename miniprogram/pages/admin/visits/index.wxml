@@ -1,0 +1,20 @@
+<view class="page" style="padding:16px 16px 70px;">
+  <view wx:if="{{list.length===0}}" style="text-align:center;padding:60px 0;">
+    <text style="font-size:40px;display:block;margin-bottom:12px;">🙋</text>
+    <text style="font-size:14px;color:#888;">暂无参观咨询</text>
+  </view>
+  <view wx:for="{{list}}" wx:key="_id" style="background:#fff;border-radius:12px;padding:14px;border:1px solid #e8e8e8;margin-bottom:10px;">
+    <view style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+      <text style="font-size:14px;font-weight:500;color:#333;">{{item.nickName || '未留名'}}</text>
+      <status-badge status="{{item.status}}" />
+    </view>
+    <view style="font-size:13px;color:#555;margin-bottom:2px;">📱 {{item.phone}}</view>
+    <view wx:if="{{item.remark}}" style="font-size:13px;color:#555;margin-bottom:2px;">💬 {{item.remark}}</view>
+    <view style="font-size:12px;color:#999;">🕐 {{item.createdAt}}</view>
+    <view wx:if="{{item.status==='pending'}}" style="display:flex;gap:8px;margin-top:10px;">
+      <view style="flex:1;background:#0F6E56;color:#fff;padding:8px;border-radius:6px;text-align:center;font-size:12px;font-weight:500;" bindtap="markDone" data-id="{{item._id}}">✅ 标记已联系</view>
+      <view style="flex:1;background:#f8f8f8;color:#555;padding:8px;border-radius:6px;text-align:center;font-size:12px;border:1px solid #e8e8e8;" bindtap="callPhone" data-phone="{{item.phone}}">📞 打电话</view>
+    </view>
+  </view>
+</view>
+<nav-bar activeTab="visits" items="{{navItems}}" />

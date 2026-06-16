@@ -2,7 +2,7 @@
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** 开发一款驾校预约微信小程序，学员可预约参观/上课，管理员（爸爸）可审核管理
+**Goal:** 开发一款驾校预约微信小程序，学员可预约参观/上课，管理员（教练）可审核管理
 
 **Architecture:** 微信原生小程序 + 微信云开发（云数据库 × 4 集合、云函数 × 11、云存储 × 二维码图片）。学员与管理员使用同一个小程序，首次通过微信一键登录后按 OpenID 自动路由到不同界面。
 
@@ -93,7 +93,7 @@ wechat-driving/
 ```javascript
 // 云开发环境 ID — 在微信开发者工具中创建云环境后替换
 const CLOUD_ENV = 'your-cloud-env-id'
-const ADMIN_OPENID = '' // 上线前填入爸爸的 OpenID
+const ADMIN_OPENID = '' // 上线前填入教练的 OpenID
 
 module.exports = { CLOUD_ENV, ADMIN_OPENID }
 ```
@@ -196,7 +196,7 @@ git commit -m "chore: 项目脚手架 + 云开发初始化"
 ```javascript
 // 在云开发控制台 -> admins 集合中手动添加一条记录：
 {
-  "openid": "",        // 上线时替换为爸爸的微信 OpenID
+  "openid": "",        // 上线时替换为教练的微信 OpenID
   "name": "张教练",
   "phone": "138xxxxxxxx",
   "schoolName": "平安驾校",
@@ -1762,7 +1762,7 @@ wx.requestSubscribeMessage({
   tmplIds: ['TEMPLATE_ID_VISIT_NOTIFY'], // 替换为实际模板ID
   success: () => {
     cloud.sendNotify({
-      openid: '', // 爸爸的 openid，需从 app.globalData 获取或查数据库
+      openid: '', // 教练的 openid，需从 app.globalData 获取或查数据库
       templateId: 'TEMPLATE_ID_VISIT_NOTIFY',
       data: {
         thing1: { value: this.data.nickName + ' 提交参观申请' },

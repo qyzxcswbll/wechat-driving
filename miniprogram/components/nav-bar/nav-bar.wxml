@@ -1,0 +1,13 @@
+<view class="nav-bar">
+  <view
+    class="nav-item {{activeTab === item.key ? 'active' : ''}}"
+    wx:for="{{items}}"
+    wx:key="key"
+    bindtap="onTap"
+    data-key="{{item.key}}"
+    data-url="{{item.url}}"
+  >
+    <text class="icon">{{item.icon}}</text>
+    <text class="label">{{item.label}}</text>
+  </view>
+</view>

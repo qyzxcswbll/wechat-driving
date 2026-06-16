@@ -17,8 +17,14 @@ Page({
     })
     wx.hideLoading()
     if (res.code === 0) {
-      wx.showToast({ title: '提交成功' })
-      setTimeout(() => wx.navigateBack(), 1500)
+      // 请求订阅消息权限（需要在微信公众平台配置模板ID后启用）
+      wx.requestSubscribeMessage({
+        tmplIds: [],
+        complete: () => {
+          wx.showToast({ title: '提交成功' })
+          setTimeout(() => wx.navigateBack(), 1500)
+        }
+      })
     } else {
       wx.showToast({ title: res.msg || '提交失败', icon: 'none' })
     }

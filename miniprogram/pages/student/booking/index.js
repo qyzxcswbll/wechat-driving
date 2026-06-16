@@ -61,8 +61,13 @@ Page({
     })
     wx.hideLoading()
     if (res.code === 0) {
-      wx.showToast({ title: '成功提交' + validSlots.length + '节预约' })
-      setTimeout(() => wx.navigateBack(), 1500)
+      wx.requestSubscribeMessage({
+        tmplIds: [],
+        complete: () => {
+          wx.showToast({ title: '成功提交' + validSlots.length + '节预约' })
+          setTimeout(() => wx.navigateBack(), 1500)
+        }
+      })
     } else {
       wx.showToast({ title: res.msg || '提交失败', icon: 'none' })
     }

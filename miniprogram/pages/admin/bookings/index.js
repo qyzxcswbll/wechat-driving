@@ -32,6 +32,12 @@ Page({
     await cloud.handleBooking(e.currentTarget.dataset.id, 'accepted')
     wx.hideLoading()
     wx.showToast({ title: '已接受' })
+    // TODO: 配置微信订阅消息模板后，通知学员
+    // cloud.sendNotify({
+    //   openid: booking.openid,
+    //   templateId: 'TEMPLATE_ID',
+    //   data: { ... }
+    // })
     this.load()
   },
   async rejectBooking(e) {
@@ -46,6 +52,7 @@ Page({
           await cloud.handleBooking(e.currentTarget.dataset.id, 'rejected', res.content)
           wx.hideLoading()
           wx.showToast({ title: '已拒绝' })
+          // TODO: 配置微信订阅消息模板后，通知学员
           this.load()
         }
       }

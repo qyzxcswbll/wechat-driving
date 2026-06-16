@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "平安驾校",
+  "usingComponents": {
+    "nav-bar": "/components/nav-bar/nav-bar"
+  }
+}

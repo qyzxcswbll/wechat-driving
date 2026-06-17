@@ -6,7 +6,7 @@
 .field-label .required { color: #A32D2D; }
 .name-row { display: flex; gap: 16rpx; align-items: center; }
 .name-input { flex: 1; background: #fff; border: 2rpx solid #ddd; border-radius: 16rpx; padding: 32rpx 28rpx; font-size: 30rpx; color: #333; display: block; width: 100%; box-sizing: border-box; min-height: 96rpx; }
-.gender-tag { padding: 24rpx 32rpx; border-radius: 16rpx; font-size: 28rpx; background: #f8f8f8; color: #666; border: 2rpx solid #e8e8e8; min-height: 96rpx; display: flex; align-items: center; flex-shrink: 0; }
+.gender-tag { padding: 20rpx 28rpx; border-radius: 14rpx; font-size: 26rpx; background: #f8f8f8; color: #666; border: 2rpx solid #e8e8e8; display: flex; align-items: center; flex-shrink: 0; }
 .gender-tag.on { background: #534AB7; color: #fff; border-color: #534AB7; }
 .field-input { background: #fff; border: 2rpx solid #ddd; border-radius: 16rpx; padding: 32rpx 28rpx; font-size: 30rpx; color: #333; display: block; width: 100%; box-sizing: border-box; min-height: 96rpx; }
 .field-text { background: #f8f8f8; border: 2rpx solid #e8e8e8; border-radius: 16rpx; padding: 32rpx 28rpx; font-size: 30rpx; color: #555; width: 100%; box-sizing: border-box; min-height: 96rpx; display: flex; align-items: center; }

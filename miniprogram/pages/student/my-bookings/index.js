@@ -13,7 +13,9 @@ Page({
     const [bRes, vRes] = await Promise.all([cloud.getMyBookings(), cloud.getMyVisits()])
     wx.hideLoading()
     if (bRes.code === 0) this.setData({ bookings: bRes.data })
+    else wx.showToast({ title: '预约加载失败', icon: 'none' })
     if (vRes.code === 0) this.setData({ visits: vRes.data })
+    else wx.showToast({ title: '参观记录加载失败', icon: 'none' })
   },
   switchTab(e) { this.setData({ tab: e.currentTarget.dataset.tab }) },
   goDetail(e) { wx.navigateTo({ url: '../booking-detail/index?id=' + e.currentTarget.dataset.id }) },

@@ -8,6 +8,7 @@ Page({
     remark: '',
     slots: [{ date: '', time: '', remark: '' }],
     studentName: '',
+    gender: '先生',
     nickName: '',
     phone: ''
   },
@@ -16,13 +17,15 @@ Page({
     if (ui) {
       this.setData({
         nickName: ui.nickName || '',
-        phone: ui.phone || '',
-        studentName: ui.studentName || ''
+        studentName: ui.studentName || '',
+        gender: ui.gender || '先生',
+        phone: ui.phone || ''
       })
     }
   },
   setSubject(e) { this.setData({ subject: e.currentTarget.dataset.val }) },
   setGear(e) { this.setData({ gear: e.currentTarget.dataset.val }) },
+  setGender(e) { this.setData({ gender: e.currentTarget.dataset.val }) },
   onNameInput(e) { this.setData({ studentName: e.detail.value }) },
   onPhoneInput(e) { this.setData({ phone: e.detail.value }) },
   onRemarkInput(e) { this.setData({ remark: e.detail.value }) },
@@ -64,6 +67,7 @@ Page({
     const res = await cloud.submitBooking({
       nickName: this.data.nickName,
       studentName: this.data.studentName,
+      gender: this.data.gender,
       phone: this.data.phone,
       bookings
     })

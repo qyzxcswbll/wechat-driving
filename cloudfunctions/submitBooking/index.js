@@ -17,6 +17,7 @@ exports.main = async (event) => {
           data: {
             phone: event.phone,
             studentName: event.studentName || '',
+            gender: event.gender || '先生',
             lastVisit: db.serverDate()
           }
         })
@@ -33,6 +34,7 @@ exports.main = async (event) => {
         openid: OPENID,
         nickName: event.nickName || '',
         studentName: event.studentName || '',
+        gender: event.gender || '先生',
         phone: event.phone || '',
         subject: b.subject,
         date: b.date,

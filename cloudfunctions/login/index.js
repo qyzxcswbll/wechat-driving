@@ -24,13 +24,14 @@ exports.main = async (event) => {
         openid: OPENID,
         nickName: event.nickName || '',
         studentName: event.studentName || '',
+        gender: event.gender || '先生',
         avatarUrl: event.avatarUrl || '',
         phone: event.phone || '',
         createdAt: db.serverDate(),
         lastVisit: db.serverDate()
       }
     })
-    return { code: 0, data: { isAdmin: false, userInfo: { _id: result._id, openid: OPENID, nickName: event.nickName, avatarUrl: event.avatarUrl, phone: event.phone || '', studentName: '' } } }
+    return { code: 0, data: { isAdmin: false, userInfo: { _id: result._id, openid: OPENID, nickName: event.nickName, avatarUrl: event.avatarUrl, phone: event.phone || '', studentName: '', gender: '先生' } } }
   }
 
   // 更新最近访问

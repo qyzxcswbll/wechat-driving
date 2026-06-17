@@ -13,6 +13,7 @@ exports.main = async (event) => {
     if (studentRes.data.length > 0) {
       const updateData = { phone, lastVisit: db.serverDate() }
       if (event.studentName) updateData.studentName = event.studentName
+      if (event.gender) updateData.gender = event.gender
       await db.collection('students').doc(studentRes.data[0]._id).update({ data: updateData })
     }
   } catch (e) {
@@ -24,6 +25,7 @@ exports.main = async (event) => {
       openid: OPENID,
       nickName: event.nickName || '',
       studentName: event.studentName || '',
+      gender: event.gender || '先生',
       phone,
       remark: remark || '',
       status: 'pending',

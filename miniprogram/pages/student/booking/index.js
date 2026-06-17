@@ -7,17 +7,23 @@ Page({
     gear: '自动挡',
     remark: '',
     slots: [{ date: '', time: '', remark: '' }],
+    studentName: '',
     nickName: '',
     phone: ''
   },
   onLoad() {
     const ui = app.globalData.userInfo
     if (ui) {
-      this.setData({ nickName: ui.nickName || '', phone: ui.phone || '' })
+      this.setData({
+        nickName: ui.nickName || '',
+        phone: ui.phone || '',
+        studentName: ui.studentName || ''
+      })
     }
   },
   setSubject(e) { this.setData({ subject: e.currentTarget.dataset.val }) },
   setGear(e) { this.setData({ gear: e.currentTarget.dataset.val }) },
+  onNameInput(e) { this.setData({ studentName: e.detail.value }) },
   onPhoneInput(e) { this.setData({ phone: e.detail.value }) },
   onRemarkInput(e) { this.setData({ remark: e.detail.value }) },
   onTimeChange(e) {
@@ -42,6 +48,7 @@ Page({
     this.setData({ slots })
   },
   async submit() {
+    if (!this.data.studentName) return wx.showToast({ title: '请输入姓名', icon: 'none' })
     if (!this.data.phone) return wx.showToast({ title: '请输入手机号', icon: 'none' })
     const validSlots = this.data.slots.filter(s => s.date && s.time)
     if (validSlots.length === 0) {
@@ -56,6 +63,7 @@ Page({
     }))
     const res = await cloud.submitBooking({
       nickName: this.data.nickName,
+      studentName: this.data.studentName,
       phone: this.data.phone,
       bookings
     })

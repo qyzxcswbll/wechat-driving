@@ -8,12 +8,31 @@ exports.main = async (event) => {
 
   if (!bookings || bookings.length === 0) return { code: -1, msg: '请至少选择一个日期' }
 
+  // 保存学员的联系方式到学员档案
+  if (event.phone) {
+    try {
+      const studentRes = await db.collection('students').where({ openid: OPENID }).get()
+      if (studentRes.data.length > 0) {
+        await db.collection('students').doc(studentRes.data[0]._id).update({
+          data: {
+            phone: event.phone,
+            studentName: event.studentName || '',
+            lastVisit: db.serverDate()
+          }
+        })
+      }
+    } catch (e) {
+      console.error('更新学员档案失败', e)
+    }
+  }
+
   const ids = []
   for (const b of bookings) {
     const result = await db.collection('bookings').add({
       data: {
         openid: OPENID,
         nickName: event.nickName || '',
+        studentName: event.studentName || '',
         phone: event.phone || '',
         subject: b.subject,
         date: b.date,

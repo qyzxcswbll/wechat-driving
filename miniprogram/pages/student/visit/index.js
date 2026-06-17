@@ -1,17 +1,27 @@
 const cloud = require('../../../utils/cloud')
 const app = getApp()
 Page({
-  data: { nickName: '', phone: '', remark: '' },
+  data: { nickName: '', studentName: '', phone: '', remark: '' },
   onLoad() {
-    this.setData({ nickName: app.globalData.userInfo?.nickName || '' })
+    const ui = app.globalData.userInfo
+    if (ui) {
+      this.setData({
+        nickName: ui.nickName || '',
+        studentName: ui.studentName || '',
+        phone: ui.phone || ''
+      })
+    }
   },
+  onNameInput(e) { this.setData({ studentName: e.detail.value }) },
   onPhoneInput(e) { this.setData({ phone: e.detail.value }) },
   onRemarkInput(e) { this.setData({ remark: e.detail.value }) },
   async submit() {
+    if (!this.data.studentName) return wx.showToast({ title: '请输入姓名', icon: 'none' })
     if (!this.data.phone) return wx.showToast({ title: '请输入手机号', icon: 'none' })
     wx.showLoading({ title: '提交中...' })
     const res = await cloud.submitVisit({
       nickName: this.data.nickName,
+      studentName: this.data.studentName,
       phone: this.data.phone,
       remark: this.data.remark
     })

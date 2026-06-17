@@ -23,13 +23,14 @@ exports.main = async (event) => {
       data: {
         openid: OPENID,
         nickName: event.nickName || '',
+        studentName: event.studentName || '',
         avatarUrl: event.avatarUrl || '',
         phone: event.phone || '',
         createdAt: db.serverDate(),
         lastVisit: db.serverDate()
       }
     })
-    return { code: 0, data: { isAdmin: false, userInfo: { _id: result._id, openid: OPENID, nickName: event.nickName, avatarUrl: event.avatarUrl, phone: event.phone || '' } } }
+    return { code: 0, data: { isAdmin: false, userInfo: { _id: result._id, openid: OPENID, nickName: event.nickName, avatarUrl: event.avatarUrl, phone: event.phone || '', studentName: '' } } }
   }
 
   // 更新最近访问

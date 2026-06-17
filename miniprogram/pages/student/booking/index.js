@@ -4,6 +4,7 @@ const app = getApp()
 Page({
   data: {
     subject: '科目二',
+    gear: '自动挡',
     remark: '',
     slots: [{ date: '', time: '', remark: '' }],
     nickName: '',
@@ -16,8 +17,9 @@ Page({
     }
   },
   setSubject(e) { this.setData({ subject: e.currentTarget.dataset.val }) },
+  setGear(e) { this.setData({ gear: e.currentTarget.dataset.val }) },
   onRemarkInput(e) { this.setData({ remark: e.detail.value }) },
-  onTimeInput(e) {
+  onTimeChange(e) {
     const idx = e.currentTarget.dataset.index
     this.setData({ ['slots[' + idx + '].time']: e.detail.value })
   },
@@ -44,10 +46,11 @@ Page({
       return wx.showToast({ title: '请至少填写一个日期和时间', icon: 'none' })
     }
     wx.showLoading({ title: '提交中...' })
+    const gearText = this.data.gear
     const bookings = validSlots.map(s => ({
       date: s.date, time: s.time,
       subject: this.data.subject,
-      remark: s.remark || this.data.remark
+      remark: (s.remark || this.data.remark) ? (s.remark || this.data.remark) + ' · ' + gearText : gearText
     }))
     const res = await cloud.submitBooking({
       nickName: this.data.nickName,

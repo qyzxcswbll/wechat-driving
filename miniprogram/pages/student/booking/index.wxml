@@ -8,8 +8,15 @@
       </view>
     </view>
     <view class="field">
+      <view class="field-label">挡位类型</view>
+      <view class="pill-group">
+        <view class="pill {{gear==='自动挡'?'on':''}}" bindtap="setGear" data-val="自动挡">自动挡</view>
+        <view class="pill {{gear==='手动挡'?'on':''}}" bindtap="setGear" data-val="手动挡">手动挡</view>
+      </view>
+    </view>
+    <view class="field">
       <view class="field-label">备注（可选）</view>
-      <input class="field-input" placeholder="自动挡/手动挡？" bindinput="onRemarkInput" />
+      <input class="field-input" placeholder="其他想说明的" bindinput="onRemarkInput" />
     </view>
   </view>
 
@@ -20,7 +27,9 @@
       <picker mode="date" value="{{item.date}}" bindchange="onDateChange" data-index="{{index}}">
         <view class="slot-date">📅 {{item.date || '选择日期'}}</view>
       </picker>
-      <input class="slot-time" placeholder="几点来" value="{{item.time}}" bindinput="onTimeInput" data-index="{{index}}" />
+      <picker mode="time" value="{{item.time}}" bindchange="onTimeChange" data-index="{{index}}">
+        <view class="slot-time">{{item.time || '选择时间'}}</view>
+      </picker>
     </view>
     <view class="slot-remark-row">
       <input class="field-input" placeholder="此日期备注（可选）" value="{{item.remark}}" bindinput="onSlotRemark" data-index="{{index}}" />

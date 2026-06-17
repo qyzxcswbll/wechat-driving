@@ -6,7 +6,7 @@
     </view>
     <view class="field">
       <view class="field-label">手机号 <text class="required">*</text></view>
-      <input class="field-input" placeholder="请输入手机号" bindinput="onPhoneInput" />
+      <input class="field-input" placeholder="请输入手机号" type="number" maxlength="11" bindinput="onPhoneInput" />
     </view>
     <view class="field">
       <view class="field-label">备注（可选）</view>

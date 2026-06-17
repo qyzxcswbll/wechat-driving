@@ -17,7 +17,10 @@ Page({
     if (vRes.code === 0) this.setData({ visits: vRes.data })
     else wx.showToast({ title: '参观记录加载失败', icon: 'none' })
   },
-  switchTab(e) { this.setData({ tab: e.currentTarget.dataset.tab }) },
+  switchTab(e) {
+    this.setData({ tab: e.currentTarget.dataset.tab })
+    this.loadData()  // 切换Tab时重新加载
+  },
   goDetail(e) { wx.navigateTo({ url: '../booking-detail/index?id=' + e.currentTarget.dataset.id }) },
   async cancelBooking(e) {
     const res = await wx.showModal({ title: '取消预约', content: '确定取消这个预约吗？', confirmText: '确定取消', confirmColor: '#A32D2D' })

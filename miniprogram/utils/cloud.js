@@ -12,6 +12,7 @@ module.exports = {
   markContacted: (id) => call('markContacted', { visitId: id }),
   submitBooking: (data) => call('submitBooking', data),
   getMyBookings: () => call('getMyBookings'),
+  getMyVisits: () => call('getMyVisits'),
   getAllBookings: () => call('getAllBookings'),
   handleBooking: (id, action, reply) => call('handleBooking', { bookingId: id, action, adminReply: reply }),
   getSchedule: () => call('getSchedule'),

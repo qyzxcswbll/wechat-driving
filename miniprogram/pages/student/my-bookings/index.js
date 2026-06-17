@@ -6,13 +6,15 @@ const NAV_ITEMS = [
   { key: 'contact', icon: '💬', label: '联系', url: '../contact/index' }
 ]
 Page({
-  data: { list: [], navItems: NAV_ITEMS },
+  data: { bookings: [], visits: [], tab: 'booking', navItems: NAV_ITEMS },
   onShow() { this.loadData() },
   async loadData() {
     wx.showLoading({ title: '加载中...' })
-    const res = await cloud.getMyBookings()
+    const [bRes, vRes] = await Promise.all([cloud.getMyBookings(), cloud.getMyVisits()])
     wx.hideLoading()
-    if (res.code === 0) this.setData({ list: res.data })
+    if (bRes.code === 0) this.setData({ bookings: bRes.data })
+    if (vRes.code === 0) this.setData({ visits: vRes.data })
   },
+  switchTab(e) { this.setData({ tab: e.currentTarget.dataset.tab }) },
   goDetail(e) { wx.navigateTo({ url: '../booking-detail/index?id=' + e.currentTarget.dataset.id }) }
 })

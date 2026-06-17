@@ -8,20 +8,24 @@ exports.main = async (event) => {
 
   if (!bookings || bookings.length === 0) return { code: -1, msg: '请至少选择一个日期' }
 
-  const tasks = bookings.map(b => ({
-    openid: OPENID,
-    nickName: event.nickName || '',
-    phone: event.phone || '',
-    subject: b.subject,
-    date: b.date,
-    time: b.time,
-    remark: b.remark || '',
-    status: 'pending',
-    adminReply: '',
-    createdAt: db.serverDate(),
-    updatedAt: db.serverDate()
-  }))
-
-  const result = await db.collection('bookings').add(tasks)
-  return { code: 0, data: { ids: result._id || result } }
+  const ids = []
+  for (const b of bookings) {
+    const result = await db.collection('bookings').add({
+      data: {
+        openid: OPENID,
+        nickName: event.nickName || '',
+        phone: event.phone || '',
+        subject: b.subject,
+        date: b.date,
+        time: b.time,
+        remark: b.remark || '',
+        status: 'pending',
+        adminReply: '',
+        createdAt: db.serverDate(),
+        updatedAt: db.serverDate()
+      }
+    })
+    ids.push(result._id)
+  }
+  return { code: 0, data: { ids } }
 }

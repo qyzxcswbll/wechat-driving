@@ -7,7 +7,7 @@
     </view>
     <view class="cal-row">
       <view wx:for="{{weekDays}}" wx:key="index"
-        class="cal-day {{item.active?"day-active":item.isToday?"day-today":"day-off"}}"
+        class="cal-day {{item.cls}}"
         bindtap="selectDay" data-date="{{item.date}}">
         <text class="cal-dow">{{item.dow}}</text>
         <text class="cal-date">{{item.day}}</text>

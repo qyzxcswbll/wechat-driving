@@ -37,7 +37,9 @@ Page({
         dow: DOWS[d.getDay()],
         day: String(d.getDate()).padStart(2, '0'),
         isToday: dateStr === todayStr,
-        active: dateStr === this.data.selectedDate || (!this.data.selectedDate && d.getDay() === now.getDay())
+        active: dateStr === this.data.selectedDate || (!this.data.selectedDate && d.getDay() === now.getDay()),
+        cls: dateStr === (this.data.selectedDate || this.dateStr(now)) ? 'day-active' :
+             dateStr === todayStr ? 'day-today' : 'day-off'
       })
     }
 

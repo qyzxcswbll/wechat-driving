@@ -1,0 +1,16 @@
+.page { padding: 32rpx 32rpx 140rpx; }
+.filter-bar { margin-bottom: 24rpx; }
+.filter-text { font-size: 26rpx; color: #0F6E56; padding: 16rpx 24rpx; background: #E1F5EE; border-radius: 16rpx; display: inline-block; }
+.mcard { background: #fff; border-radius: 24rpx; padding: 28rpx; border: 2rpx solid #e8e8e8; margin-bottom: 20rpx; }
+.mcard-pend { border-left: 6rpx solid #BA7517; }
+.mcard-ok { border-left: 6rpx solid #0F6E56; }
+.mcard-rejected { border-left: 6rpx solid #A32D2D; }
+.mcard-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12rpx; }
+.mcard-name { font-size: 28rpx; font-weight: 500; color: #333; }
+.mcard-info { font-size: 26rpx; color: #555; margin-bottom: 4rpx; }
+.mcard-reply { font-size: 24rpx; color: #A32D2D; margin-top: 16rpx; }
+.action-row { display: flex; gap: 12rpx; margin-top: 20rpx; }
+.abtn { flex: 1; padding: 16rpx; border-radius: 12rpx; text-align: center; font-size: 24rpx; font-weight: 500; }
+.abtn-accept { background: #0F6E56; color: #fff; }
+.abtn-reject { background: #A32D2D; color: #fff; }
+.abtn-wx { background: #f8f8f8; color: #555; border: 2rpx solid #e8e8e8; }

@@ -1,0 +1,12 @@
+.page { padding: 32rpx 32rpx 140rpx; }
+.empty { text-align: center; padding: 120rpx 0; }
+.empty-icon { font-size: 80rpx; display: block; margin-bottom: 24rpx; }
+.empty-text { font-size: 28rpx; color: #888; }
+.card { background: #fff; border-radius: 24rpx; padding: 28rpx; border: 2rpx solid #e8e8e8; margin-bottom: 20rpx; }
+.card-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12rpx; }
+.card-name { font-size: 28rpx; font-weight: 500; color: #333; }
+.card-info { font-size: 26rpx; color: #555; margin-bottom: 4rpx; }
+.card-time { font-size: 24rpx; color: #999; }
+.action-row { display: flex; gap: 16rpx; margin-top: 20rpx; }
+.btn-done { flex: 1; background: #0F6E56; color: #fff; padding: 16rpx; border-radius: 12rpx; text-align: center; font-size: 24rpx; font-weight: 500; }
+.btn-call { flex: 1; background: #f8f8f8; color: #555; padding: 16rpx; border-radius: 12rpx; text-align: center; font-size: 24rpx; border: 2rpx solid #e8e8e8; }

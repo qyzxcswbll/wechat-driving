@@ -25,14 +25,9 @@ Page({
     const idx = e.currentTarget.dataset.index
     this.setData({ ['slots[' + idx + '].remark']: e.detail.value })
   },
-  pickDate(e) {
+  onDateChange(e) {
     const idx = e.currentTarget.dataset.index
-    const self = this
-    wx.showDatePicker({
-      success(res) {
-        self.setData({ ['slots[' + idx + '].date']: res.date })
-      }
-    })
+    this.setData({ ['slots[' + idx + '].date']: e.detail.value })
   },
   addSlot() {
     const slots = [...this.data.slots, { date: '', time: '', remark: '' }]

@@ -1,32 +1,32 @@
-<view class="page" style="padding:16px;">
-  <view wx:if="{{info._id}}" style="background:#fff;border-radius:12px;padding:16px;border:1px solid #e8e8e8;">
-    <view style="display:flex;padding:10px 0;border-bottom:1px solid #f0f0f0;">
-      <text style="width:70px;font-size:14px;color:#888;flex-shrink:0;">状态</text>
+<view class="page">
+  <view wx:if="{{info._id}}" class="card">
+    <view class="detail-row">
+      <text class="dl">状态</text>
       <status-badge status="{{info.status}}" />
     </view>
-    <view style="display:flex;padding:10px 0;border-bottom:1px solid #f0f0f0;">
-      <text style="width:70px;font-size:14px;color:#888;flex-shrink:0;">日期</text>
-      <text style="font-size:14px;color:#333;">{{info.date}}</text>
+    <view class="detail-row">
+      <text class="dl">日期</text>
+      <text class="dv">{{info.date}}</text>
     </view>
-    <view style="display:flex;padding:10px 0;border-bottom:1px solid #f0f0f0;">
-      <text style="width:70px;font-size:14px;color:#888;flex-shrink:0;">时间</text>
-      <text style="font-size:14px;color:#333;">{{info.time}}</text>
+    <view class="detail-row">
+      <text class="dl">时间</text>
+      <text class="dv">{{info.time}}</text>
     </view>
-    <view style="display:flex;padding:10px 0;border-bottom:1px solid #f0f0f0;">
-      <text style="width:70px;font-size:14px;color:#888;flex-shrink:0;">科目</text>
-      <text style="font-size:14px;color:#333;">{{info.subject}}</text>
+    <view class="detail-row">
+      <text class="dl">科目</text>
+      <text class="dv">{{info.subject}}</text>
     </view>
-    <view wx:if="{{info.remark}}" style="display:flex;padding:10px 0;border-bottom:1px solid #f0f0f0;">
-      <text style="width:70px;font-size:14px;color:#888;flex-shrink:0;">备注</text>
-      <text style="font-size:14px;color:#333;">{{info.remark}}</text>
+    <view wx:if="{{info.remark}}" class="detail-row">
+      <text class="dl">备注</text>
+      <text class="dv">{{info.remark}}</text>
     </view>
-    <view wx:if="{{info.adminReply}}" style="display:flex;padding:10px 0;border-bottom:1px solid #f0f0f0;">
-      <text style="width:70px;font-size:14px;color:#888;flex-shrink:0;">回复</text>
-      <text style="font-size:14px;color:#A32D2D;">{{info.adminReply}}</text>
+    <view wx:if="{{info.adminReply}}" class="detail-row">
+      <text class="dl">回复</text>
+      <text class="dv-reply">{{info.adminReply}}</text>
     </view>
-    <view style="display:flex;padding:10px 0;">
-      <text style="width:70px;font-size:14px;color:#888;flex-shrink:0;">提交时间</text>
-      <text style="font-size:14px;color:#333;">{{info.createdAt}}</text>
+    <view class="detail-row">
+      <text class="dl">提交时间</text>
+      <text class="dv">{{info.createdAt}}</text>
     </view>
   </view>
 </view>

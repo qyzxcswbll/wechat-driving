@@ -1,0 +1,16 @@
+.page { padding: 32rpx 32rpx 140rpx; }
+.stat-row { display: flex; gap: 16rpx; margin-bottom: 32rpx; }
+.stat-card { flex: 1; border-radius: 20rpx; padding: 28rpx; text-align: center; }
+.stat-num { font-size: 48rpx; font-weight: 600; }
+.stat-lbl { font-size: 22rpx; margin-top: 8rpx; }
+.pending { background: #FAEEDA; }
+.pending .stat-num { color: #633806; }
+.pending .stat-lbl { color: #BA7517; }
+.normal { background: #E1F5EE; }
+.normal .stat-num { color: #085041; }
+.normal .stat-lbl { color: #0F6E56; }
+.menu-grid { display: flex; gap: 16rpx; }
+.menu-item { flex: 1; background: #E1F5EE; border: 2rpx solid #9FE1CB; border-radius: 20rpx; padding: 32rpx; text-align: center; }
+.menu-item text { display: block; }
+.menu-icon { font-size: 48rpx; margin-bottom: 12rpx; }
+.menu-label { font-size: 24rpx; color: #085041; }

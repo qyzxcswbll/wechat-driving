@@ -1,17 +1,42 @@
 {
   "description": "平安驾校预约小程序",
-  "packOptions": { "ignore": [] },
+  "packOptions": {
+    "ignore": [],
+    "include": []
+  },
   "setting": {
     "urlCheck": true,
     "es6": true,
     "postcss": true,
     "minified": true,
-    "cloud": true
+    "cloud": true,
+    "compileWorklet": false,
+    "uglifyFileName": false,
+    "uploadWithSourceMap": true,
+    "enhance": false,
+    "packNpmManually": false,
+    "packNpmRelationList": [],
+    "minifyWXSS": true,
+    "minifyWXML": true,
+    "localPlugins": false,
+    "disableUseStrict": false,
+    "useCompilerPlugins": false,
+    "condition": false,
+    "swc": false,
+    "disableSWC": true,
+    "babelSetting": {
+      "ignore": [],
+      "disablePlugins": [],
+      "outputPath": ""
+    }
   },
   "cloudfunctionRoot": "cloudfunctions/",
+  "miniprogramRoot": "miniprogram/",
   "compileType": "miniprogram",
   "libVersion": "3.7.0",
-  "appid": "wx0000000000000000",
+  "appid": "wxd004a2053f1e2302",
   "projectname": "wechat-driving",
-  "condition": {}
+  "condition": {},
+  "simulatorPluginLibVersion": {},
+  "editorSetting": {}
 }

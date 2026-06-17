@@ -1,0 +1,20 @@
+.page { padding: 32rpx 32rpx 140rpx; }
+.card { background: #fff; border-radius: 24rpx; padding: 32rpx; border: 2rpx solid #e8e8e8; }
+.field { margin-bottom: 32rpx; }
+.field:last-child { margin-bottom: 0; }
+.field-label { font-size: 24rpx; color: #888; margin-bottom: 12rpx; }
+.field-input { background: #fff; border: 2rpx solid #ddd; border-radius: 16rpx; padding: 24rpx 28rpx; font-size: 28rpx; color: #333; width: 100%; box-sizing: border-box; }
+.pill-group { display: flex; gap: 16rpx; }
+.pill { flex: 1; padding: 20rpx; border-radius: 16rpx; text-align: center; font-size: 26rpx; background: #f8f8f8; color: #666; border: 2rpx solid #e8e8e8; }
+.pill.on { background: #534AB7; color: #fff; border-color: #534AB7; }
+.section-title { font-size: 30rpx; font-weight: 500; color: #333; margin: 32rpx 0 16rpx; }
+.slot-card { background: #fff; border-radius: 24rpx; padding: 28rpx; border: 2rpx solid #e8e8e8; margin-bottom: 20rpx; }
+.slot-row { display: flex; gap: 16rpx; margin-bottom: 16rpx; }
+.slot-date { flex: 1; background: #f8f8f8; border: 2rpx solid #e8e8e8; border-radius: 16rpx; padding: 22rpx 24rpx; font-size: 28rpx; color: #555; text-align: center; }
+.slot-time { flex: 1; background: #fff; border: 2rpx solid #ddd; border-radius: 16rpx; padding: 22rpx 24rpx; font-size: 28rpx; color: #333; width: 100%; box-sizing: border-box; }
+.slot-remark-row { display: flex; align-items: center; gap: 16rpx; }
+.slot-remark-row .field-input { flex: 1; }
+.slot-del { color: #A32D2D; font-size: 24rpx; flex-shrink: 0; }
+.add-slot { border: 3rpx dashed #ccc; border-radius: 20rpx; padding: 24rpx; text-align: center; font-size: 26rpx; color: #888; margin-bottom: 32rpx; }
+.btn-primary { background: #534AB7; color: #fff; padding: 28rpx; border-radius: 20rpx; text-align: center; font-size: 30rpx; font-weight: 500; width: 100%; border: none; }
+.btn-primary::after { border: none; }

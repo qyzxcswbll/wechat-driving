@@ -1,0 +1,7 @@
+.page { padding: 32rpx; }
+.card { background: #fff; border-radius: 24rpx; padding: 32rpx; border: 2rpx solid #e8e8e8; }
+.detail-row { display: flex; padding: 20rpx 0; border-bottom: 2rpx solid #f0f0f0; }
+.detail-row:last-child { border-bottom: none; }
+.dl { width: 140rpx; font-size: 28rpx; color: #888; flex-shrink: 0; }
+.dv { font-size: 28rpx; color: #333; }
+.dv-reply { font-size: 28rpx; color: #A32D2D; }

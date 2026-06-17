@@ -1,0 +1,19 @@
+.page { padding: 32rpx 32rpx 140rpx; }
+.cal-card { background: #fff; border-radius: 24rpx; padding: 28rpx; border: 2rpx solid #e8e8e8; }
+.cal-nav { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24rpx; }
+.cal-arrow { font-size: 36rpx; font-weight: 500; color: #333; padding: 8rpx 16rpx; }
+.cal-title { font-size: 28rpx; color: #0F6E56; font-weight: 500; }
+.cal-row { display: flex; gap: 8rpx; }
+.cal-day { flex: 1; padding: 16rpx 4rpx; text-align: center; font-size: 22rpx; border-radius: 12rpx; }
+.cal-dow { display: block; }
+.cal-date { display: block; margin-top: 4rpx; font-size: 24rpx; }
+.day-off { background: #f8f8f8; color: #666; border: 2rpx solid #e8e8e8; }
+.day-active { background: #0F6E56; color: #fff; }
+.day-today { background: #E1F5EE; color: #0F6E56; border: 2rpx solid #9FE1CB; }
+.section-title { font-size: 30rpx; font-weight: 500; color: #333; margin: 32rpx 0 20rpx; }
+.empty-card { background: #fff; border-radius: 24rpx; padding: 80rpx; text-align: center; border: 2rpx solid #e8e8e8; }
+.empty-icon { font-size: 80rpx; display: block; margin-bottom: 16rpx; }
+.empty-text { font-size: 28rpx; color: #888; }
+.schedule-item { background: #E1F5EE; padding: 24rpx; border-radius: 16rpx; margin-bottom: 12rpx; border-left: 8rpx solid #0F6E56; display: flex; align-items: center; gap: 20rpx; }
+.schedule-time { font-size: 26rpx; font-weight: 500; color: #085041; flex-shrink: 0; }
+.schedule-info { font-size: 26rpx; color: #333; }

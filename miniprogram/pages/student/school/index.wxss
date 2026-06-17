@@ -1,0 +1,10 @@
+.page { padding: 32rpx; }
+.hero { background: linear-gradient(135deg, #EEEDFE, #F8F7FF); border-radius: 28rpx; padding: 48rpx; text-align: center; margin-bottom: 32rpx; border: 2rpx solid #CECBF6; }
+.hero-title { font-size: 44rpx; font-weight: 600; color: #3C3489; margin-bottom: 8rpx; }
+.hero-sub { font-size: 28rpx; color: #7F77DD; }
+.card { background: #fff; border-radius: 24rpx; padding: 28rpx; border: 2rpx solid #e8e8e8; margin-bottom: 24rpx; }
+.section-title { font-size: 30rpx; font-weight: 500; color: #333; margin-bottom: 16rpx; }
+.body-text { font-size: 28rpx; color: #555; line-height: 1.7; }
+.btn-row { display: flex; gap: 20rpx; }
+.btn-primary { flex: 1; background: #534AB7; color: #fff; padding: 28rpx; border-radius: 20rpx; text-align: center; font-size: 28rpx; font-weight: 500; }
+.btn-secondary { flex: 1; background: #fff; color: #534AB7; padding: 28rpx; border-radius: 20rpx; text-align: center; font-size: 28rpx; font-weight: 500; border: 3rpx solid #CECBF6; }

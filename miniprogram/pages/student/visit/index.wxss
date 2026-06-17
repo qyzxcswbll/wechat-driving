@@ -1,11 +1,11 @@
 .page { padding: 32rpx; width: 100%; box-sizing: border-box; }
 .card { background: #fff; border-radius: 24rpx; padding: 32rpx; border: 2rpx solid #e8e8e8; width: 100%; box-sizing: border-box; }
-.field { margin-bottom: 32rpx; width: 100%; }
+.field { margin-bottom: 40rpx; width: 100%; }
 .field:last-child { margin-bottom: 0; }
 .field-label { font-size: 24rpx; color: #888; margin-bottom: 12rpx; }
 .field-label .required { color: #A32D2D; }
-.field-input { background: #fff; border: 2rpx solid #ddd; border-radius: 16rpx; padding: 24rpx 28rpx; font-size: 28rpx; color: #333; display: block; width: 100%; box-sizing: border-box; }
-.field-text { background: #f8f8f8; border: 2rpx solid #e8e8e8; border-radius: 16rpx; padding: 24rpx 28rpx; font-size: 28rpx; color: #555; width: 100%; box-sizing: border-box; }
-.btn-primary { background: #534AB7; color: #fff; padding: 28rpx; border-radius: 20rpx; text-align: center; font-size: 30rpx; font-weight: 500; margin-top: 32rpx; width: 100%; border: none; display: block; box-sizing: border-box; }
+.field-input { background: #fff; border: 2rpx solid #ddd; border-radius: 16rpx; padding: 28rpx 28rpx; font-size: 30rpx; color: #333; display: block; width: 100%; box-sizing: border-box; min-height: 88rpx; }
+.field-text { background: #f8f8f8; border: 2rpx solid #e8e8e8; border-radius: 16rpx; padding: 28rpx 28rpx; font-size: 30rpx; color: #555; width: 100%; box-sizing: border-box; }
+.btn-primary { background: #534AB7; color: #fff; padding: 28rpx; border-radius: 20rpx; text-align: center; font-size: 30rpx; font-weight: 500; margin-top: 40rpx; width: 100%; border: none; display: block; box-sizing: border-box; min-height: 88rpx; }
 .btn-primary::after { border: none; }
 .hint { font-size: 24rpx; color: #aaa; text-align: center; margin-top: 20rpx; }

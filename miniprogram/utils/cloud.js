@@ -16,5 +16,6 @@ module.exports = {
   getAllBookings: () => call('getAllBookings'),
   handleBooking: (id, action, reply) => call('handleBooking', { bookingId: id, action, adminReply: reply }),
   getSchedule: () => call('getSchedule'),
-  sendNotify: (data) => call('sendNotify', data)
+  sendNotify: (data) => call('sendNotify', data),
+  cancelBooking: (id) => call('cancelBooking', { bookingId: id })
 }

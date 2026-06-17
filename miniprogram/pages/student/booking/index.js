@@ -18,6 +18,7 @@ Page({
   },
   setSubject(e) { this.setData({ subject: e.currentTarget.dataset.val }) },
   setGear(e) { this.setData({ gear: e.currentTarget.dataset.val }) },
+  onPhoneInput(e) { this.setData({ phone: e.detail.value }) },
   onRemarkInput(e) { this.setData({ remark: e.detail.value }) },
   onTimeChange(e) {
     const idx = e.currentTarget.dataset.index
@@ -41,6 +42,7 @@ Page({
     this.setData({ slots })
   },
   async submit() {
+    if (!this.data.phone) return wx.showToast({ title: '请输入手机号', icon: 'none' })
     const validSlots = this.data.slots.filter(s => s.date && s.time)
     if (validSlots.length === 0) {
       return wx.showToast({ title: '请至少填写一个日期和时间', icon: 'none' })

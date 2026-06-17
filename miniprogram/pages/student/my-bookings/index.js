@@ -16,5 +16,18 @@ Page({
     if (vRes.code === 0) this.setData({ visits: vRes.data })
   },
   switchTab(e) { this.setData({ tab: e.currentTarget.dataset.tab }) },
-  goDetail(e) { wx.navigateTo({ url: '../booking-detail/index?id=' + e.currentTarget.dataset.id }) }
+  goDetail(e) { wx.navigateTo({ url: '../booking-detail/index?id=' + e.currentTarget.dataset.id }) },
+  async cancelBooking(e) {
+    const res = await wx.showModal({ title: '取消预约', content: '确定取消这个预约吗？', confirmText: '确定取消', confirmColor: '#A32D2D' })
+    if (!res.confirm) return
+    wx.showLoading({ title: '处理中...' })
+    const result = await cloud.cancelBooking(e.currentTarget.dataset.id)
+    wx.hideLoading()
+    if (result.code === 0) {
+      wx.showToast({ title: '已取消' })
+      this.loadData()
+    } else {
+      wx.showToast({ title: result.msg || '取消失败', icon: 'none' })
+    }
+  }
 })

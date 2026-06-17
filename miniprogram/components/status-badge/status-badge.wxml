@@ -2,6 +2,7 @@
   <text wx:if="{{status === 'pending'}}">⏳ 待确认</text>
   <text wx:elif="{{status === 'accepted'}}">✅ 已接受</text>
   <text wx:elif="{{status === 'rejected'}}">❌ 已拒绝</text>
+  <text wx:elif="{{status === 'cancelled'}}">✖️ 已取消</text>
   <text wx:elif="{{status === 'contacted'}}">✅ 已联系</text>
   <text wx:else>{{status}}</text>
 </view>

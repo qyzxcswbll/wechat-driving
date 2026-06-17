@@ -8,4 +8,5 @@
 .pending { background: #FAEEDA; color: #BA7517; }
 .accepted { background: #E1F5EE; color: #0F6E56; }
 .rejected { background: #FCEBEB; color: #A32D2D; }
+.cancelled { background: #f0f0f0; color: #888; }
 .contacted { background: #E1F5EE; color: #0F6E56; }

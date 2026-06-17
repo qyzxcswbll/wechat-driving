@@ -12,3 +12,4 @@
 .menu-item { width: calc(50% - 10rpx); background: #fff; border: 2rpx solid #e8e8e8; border-radius: 24rpx; padding: 36rpx 24rpx; text-align: center; box-sizing: border-box; }
 .menu-icon { display: block; font-size: 56rpx; margin-bottom: 12rpx; }
 .menu-label { font-size: 26rpx; color: #555; }
+.setup-entry { position: fixed; bottom: 160rpx; right: 20rpx; font-size: 36rpx; opacity: 0.4; padding: 16rpx; z-index: 200; }

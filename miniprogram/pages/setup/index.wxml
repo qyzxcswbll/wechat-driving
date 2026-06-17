@@ -1,0 +1,66 @@
+<view class="page" style="padding:32rpx;">
+
+  <!-- ===== 密码验证 ===== -->
+  <view wx:if="{{!authed}}" class="card">
+    <view style="font-size:36rpx;font-weight:600;color:#333;text-align:center;margin-bottom:32rpx;">🔐 管理设置</view>
+    <view class="field">
+      <view class="field-label">请输入管理密码</view>
+      <input class="field-input" placeholder="输入密码" type="number" password="{{true}}" bindinput="onPwdInput" />
+    </view>
+    <button class="btn-primary" bindtap="verifyPwd">验证</button>
+  </view>
+
+  <!-- ===== 设置面板 ===== -->
+  <view wx:if="{{authed}}">
+
+    <!-- 学员管理 -->
+    <view class="card" style="margin-bottom:24rpx;">
+      <view class="sect-title">👤 学员管理</view>
+      <view style="font-size:24rpx;color:#888;margin-bottom:16rpx;">选择学员设为教练（管理员）</view>
+      <view wx:if="{{students.length===0}}" style="text-align:center;padding:40rpx 0;color:#999;">暂无学员记录</view>
+      <view wx:for="{{students}}" wx:key="_id" style="display:flex;justify-content:space-between;align-items:center;padding:20rpx 0;border-bottom:2rpx solid #f0f0f0;">
+        <view>
+          <view style="font-size:28rpx;color:#333;">{{item.studentName || item.nickName || '未命名'}}</view>
+          <view style="font-size:24rpx;color:#888;">📱 {{item.phone || '未填'}}</view>
+        </view>
+        <view class="set-btn" bindtap="setAsAdmin" data-openid="{{item.openid}}">设为教练</view>
+      </view>
+      <view wx:if="{{setMsg}}" style="margin-top:16rpx;font-size:24rpx;color:#0F6E56;">{{setMsg}}</view>
+    </view>
+
+    <!-- 驾校信息 -->
+    <view class="card">
+      <view class="sect-title">🏫 驾校信息</view>
+      <view class="field">
+        <view class="field-label">教练姓名</view>
+        <input class="field-input" value="{{form.name}}" bindinput="onFormInput" data-field="name" placeholder="如：张教练" />
+      </view>
+      <view class="field">
+        <view class="field-label">手机号</view>
+        <input class="field-input" value="{{form.phone}}" bindinput="onFormInput" data-field="phone" placeholder="联系电话" type="number" maxlength="11" />
+      </view>
+      <view class="field">
+        <view class="field-label">驾校名称</view>
+        <input class="field-input" value="{{form.schoolName}}" bindinput="onFormInput" data-field="schoolName" placeholder="如：平安驾校" />
+      </view>
+      <view class="field">
+        <view class="field-label">驾校地址</view>
+        <input class="field-input" value="{{form.address}}" bindinput="onFormInput" data-field="address" placeholder="如：汕头市龙湖区xx路" />
+      </view>
+      <view class="field">
+        <view class="field-label">教练简介</view>
+        <input class="field-input" value="{{form.intro}}" bindinput="onFormInput" data-field="intro" placeholder="如：多年教学经验" />
+      </view>
+      <view class="field">
+        <view class="field-label">微信二维码</view>
+        <view style="display:flex;gap:16rpx;align-items:center;">
+          <input class="field-input" style="flex:1;" value="{{form.wechatQR}}" bindinput="onFormInput" data-field="wechatQR" placeholder="上传后粘贴fileID" />
+          <button class="upload-btn" bindtap="chooseImage">上传</button>
+        </view>
+      </view>
+      <button class="btn-primary" bindtap="saveSchool" style="margin-top:16rpx;">保存驾校信息</button>
+      <view wx:if="{{saveMsg}}" style="margin-top:16rpx;font-size:24rpx;color:#0F6E56;">{{saveMsg}}</view>
+    </view>
+
+  </view>
+</view>

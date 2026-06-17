@@ -11,7 +11,8 @@
     "pages/admin/home/index",
     "pages/admin/visits/index",
     "pages/admin/bookings/index",
-    "pages/admin/schedule/index"
+    "pages/admin/schedule/index",
+    "pages/setup/index"
   ],
   "entryPagePath": "pages/splash/index",
   "window": {

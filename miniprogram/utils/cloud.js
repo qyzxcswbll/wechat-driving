@@ -17,5 +17,9 @@ module.exports = {
   handleBooking: (id, action, reply) => call('handleBooking', { bookingId: id, action, adminReply: reply }),
   getSchedule: () => call('getSchedule'),
   sendNotify: (data) => call('sendNotify', data),
-  cancelBooking: (id) => call('cancelBooking', { bookingId: id })
+  cancelBooking: (id) => call('cancelBooking', { bookingId: id }),
+  setupVerify: (password) => call('setupVerify', { password }),
+  setupGetAllStudents: () => call('setupGetAllStudents'),
+  setupSetAdmin: (openid) => call('setupSetAdmin', { openid }),
+  setupUpdateSchool: (data) => call('setupUpdateSchool', data)
 }

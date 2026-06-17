@@ -13,5 +13,6 @@ Page({
       if (res.code === 0) this.setData({ schoolInfo: res.data })
     })
   },
-  goTo(e) { wx.navigateTo({ url: e.currentTarget.dataset.url }) }
+  goTo(e) { wx.navigateTo({ url: e.currentTarget.dataset.url }) },
+  goSetup() { wx.navigateTo({ url: '/pages/setup/index' }) }
 })

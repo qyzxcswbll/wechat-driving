@@ -33,6 +33,7 @@
       <text class="menu-label">联系我们</text>
     </view>
   </view>
+  <view class="setup-entry" bindtap="goSetup">⚙️</view>
 </view>
 
 <nav-bar activeTab="home" items="{{navItems}}" />

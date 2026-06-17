@@ -22,6 +22,7 @@ Page({
     if (res.code === 0) {
       this.setData({ authed: true })
       this.loadStudents()
+      this.loadSchoolInfo()
     } else {
       wx.showToast({ title: '密码错误', icon: 'none' })
     }
@@ -30,13 +31,41 @@ Page({
     const res = await cloud.setupGetAllStudents()
     if (res.code === 0) this.setData({ students: res.data })
   },
+  async loadSchoolInfo() {
+    const res = await cloud.getSchoolInfo()
+    if (res.code === 0 && res.data) {
+      this.setData({
+        form: {
+          name: res.data.coachName || '',
+          phone: res.data.phone || '',
+          schoolName: res.data.schoolName || '',
+          address: res.data.address || '',
+          intro: res.data.intro || '',
+          wechatQR: res.data.wechatQR || ''
+        }
+      })
+    }
+  },
   async setAsAdmin(e) {
     const openid = e.currentTarget.dataset.openid
+    const student = this.data.students.find(s => s.openid === openid)
     wx.showLoading({ title: '设置中...' })
     const res = await cloud.setupSetAdmin(openid)
     wx.hideLoading()
     this.setData({ setMsg: res.msg })
-    if (res.code === 0) wx.showToast({ title: '设置成功' })
+    if (res.code === 0) {
+      wx.showToast({ title: '设置成功' })
+      // 自动填充已知信息到表单
+      if (student) {
+        this.setData({
+          form: {
+            ...this.data.form,
+            name: student.studentName || student.nickName || '教练',
+            phone: student.phone || ''
+          }
+        })
+      }
+    }
   },
   async chooseImage() {
     wx.chooseImage({

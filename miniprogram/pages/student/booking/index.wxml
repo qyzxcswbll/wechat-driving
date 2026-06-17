@@ -20,7 +20,7 @@
       <picker mode="date" value="{{item.date}}" bindchange="onDateChange" data-index="{{index}}">
         <view class="slot-date">📅 {{item.date || '选择日期'}}</view>
       </picker>
-      <input class="slot-time" placeholder="期望时间" value="{{item.time}}" bindinput="onTimeInput" data-index="{{index}}" />
+      <input class="slot-time" placeholder="几点来" value="{{item.time}}" bindinput="onTimeInput" data-index="{{index}}" />
     </view>
     <view class="slot-remark-row">
       <input class="field-input" placeholder="此日期备注（可选）" value="{{item.remark}}" bindinput="onSlotRemark" data-index="{{index}}" />

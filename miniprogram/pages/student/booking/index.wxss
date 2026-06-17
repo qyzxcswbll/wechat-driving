@@ -13,7 +13,7 @@
 .slot-date { flex: 1; background: #f8f8f8; border: 2rpx solid #e8e8e8; border-radius: 16rpx; padding: 30rpx 24rpx; font-size: 28rpx; color: #555; text-align: center; min-height: 96rpx; display: flex; align-items: center; justify-content: center; }
 .slot-time { flex: 1; background: #fff; border: 2rpx solid #ddd; border-radius: 16rpx; padding: 30rpx 24rpx; font-size: 28rpx; color: #333; display: block; width: 100%; box-sizing: border-box; min-height: 96rpx; }
 .slot-remark-row { display: flex; align-items: center; gap: 16rpx; width: 100%; }
-.slot-remark-row .field-input { flex: 1; min-height: 88rpx; }
+.slot-remark-row .field-input { flex: 1; padding: 24rpx 28rpx; min-height: 96rpx; }
 .slot-del { color: #A32D2D; font-size: 24rpx; flex-shrink: 0; padding: 20rpx 0; }
 .add-slot { border: 3rpx dashed #ccc; border-radius: 20rpx; padding: 28rpx; text-align: center; font-size: 28rpx; color: #888; margin-bottom: 40rpx; width: 100%; box-sizing: border-box; }
 .btn-primary { background: #534AB7; color: #fff; padding: 32rpx; border-radius: 20rpx; text-align: center; font-size: 30rpx; font-weight: 500; width: 100%; border: none; display: block; box-sizing: border-box; min-height: 96rpx; line-height: 1.2; }

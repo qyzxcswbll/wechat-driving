@@ -1,16 +1,12 @@
 <view class="page">
   <view class="cal-card">
-    <view class="cal-nav">
-      <text class="cal-arrow" bindtap="prevWeek">‹</text>
-      <text class="cal-title">{{weekLabel}}</text>
-      <text class="cal-arrow" bindtap="nextWeek">›</text>
-    </view>
     <view class="cal-row">
-      <view wx:for="{{weekDays}}" wx:key="index"
-        class="cal-day {{item.cls}}"
+      <view wx:for="{{days}}" wx:key="index"
+        class="cal-day {{item.active?'day-active':item.isToday?'day-today':'day-off'}}"
         bindtap="selectDay" data-date="{{item.date}}">
         <text class="cal-dow">{{item.dow}}</text>
         <text class="cal-date">{{item.day}}</text>
+        <text class="cal-count" wx:if="{{item.count>0}}">{{item.count}}节</text>
       </view>
     </view>
   </view>
@@ -22,9 +18,30 @@
     <text class="empty-text">当天暂无课程</text>
   </view>
 
-  <view wx:for="{{daySchedule}}" wx:key="_id" class="schedule-item">
-    <text class="schedule-time">{{item.time}}</text>
-    <text class="schedule-info">{{item.nickName}} · {{item.subject}}</text>
+  <view wx:for="{{daySchedule}}" wx:key="_id" class="schedule-item" bindtap="showDetail" data-item="{{item}}">
+    <view class="si-left">
+      <text class="si-time">{{item.time}}</text>
+      <text class="si-name">{{item.studentName || item.nickName}}</text>
+    </view>
+    <view class="si-right">
+      <text class="si-subject">{{item.subject}}</text>
+      <text class="si-arrow">›</text>
+    </view>
+  </view>
+
+  <!-- 学员详情弹窗 -->
+  <view wx:if="{{showModal}}" class="modal-mask" bindtap="closeModal">
+    <view class="modal-box" catchtap="stopProp">
+      <view class="modal-hd">📋 学员详情</view>
+      <view class="modal-body">
+        <view class="modal-row"><text class="ml">姓名</text><text class="mv">{{modalData.studentName || modalData.nickName}}</text></view>
+        <view class="modal-row"><text class="ml">电话</text><text class="mv">{{modalData.phone || '未填'}}</text></view>
+        <view class="modal-row"><text class="ml">科目</text><text class="mv">{{modalData.subject}}</text></view>
+        <view class="modal-row"><text class="ml">时间</text><text class="mv">{{modalData.date}} {{modalData.time}}</text></view>
+        <view class="modal-row" wx:if="{{modalData.remark}}"><text class="ml">备注</text><text class="mv">{{modalData.remark}}</text></view>
+      </view>
+      <view class="modal-close" bindtap="closeModal">关闭</view>
+    </view>
   </view>
 </view>
 <nav-bar activeTab="schedule" items="{{navItems}}" />

@@ -9,6 +9,7 @@
 .mcard-name { font-size: 28rpx; font-weight: 500; color: #333; }
 .mcard-info { font-size: 26rpx; color: #555; margin-bottom: 4rpx; }
 .mcard-reply { font-size: 24rpx; color: #A32D2D; margin-top: 16rpx; }
+.slot-hint { font-size: 22rpx; color: #BA7517; background: #FAEEDA; padding: 12rpx 16rpx; border-radius: 8rpx; margin-top: 16rpx; }
 .action-row { display: flex; gap: 12rpx; margin-top: 20rpx; }
 .abtn { flex: 1; padding: 16rpx; border-radius: 12rpx; text-align: center; font-size: 24rpx; font-weight: 500; }
 .abtn-accept { background: #0F6E56; color: #fff; }

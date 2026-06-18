@@ -19,12 +19,35 @@ Page({
       this.applyFilter()
     }
   },
+  // 计算同一时段（同天±1小时）的已接受+待处理人数
+  sameSlotCount(booking, all) {
+    if (!booking.time) return 0
+    const [h, m] = booking.time.split(':').map(Number)
+    const minutes = h * 60 + m
+    return all.filter(b =>
+      b._id !== booking._id &&
+      (b.status === 'accepted' || b.status === 'pending') &&
+      b.date === booking.date &&
+      b.time
+    ).filter(b => {
+      const [bh, bm] = b.time.split(':').map(Number)
+      const bMinutes = bh * 60 + bm
+      return Math.abs(bMinutes - minutes) <= 60
+    }).length
+  },
+
   applyFilter() {
     const idx = this.data.filterIdx
     let displayList = this.data.list
     if (idx === 1) displayList = displayList.filter(b => b.status === 'pending')
     else if (idx === 2) displayList = displayList.filter(b => b.status === 'accepted')
     else if (idx === 3) displayList = displayList.filter(b => b.status === 'rejected')
+    // 计算同时间段人数
+    const all = this.data.list
+    displayList = displayList.map(b => ({
+      ...b,
+      sameSlotCount: this.sameSlotCount(b, all)
+    }))
     this.setData({ displayList })
   },
   onFilter(e) {

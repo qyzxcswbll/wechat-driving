@@ -9,46 +9,40 @@ const DOWS = ['日', '一', '二', '三', '四', '五', '六']
 
 Page({
   data: {
-    scheduleMap: {}, weekDays: [], weekLabel: '', selectedDate: '',
-    daySchedule: [], weekOffset: 0, navItems: NAV_ITEMS
+    scheduleMap: {}, days: [], selectedDate: '', daySchedule: [],
+    showModal: false, modalData: {}, navItems: NAV_ITEMS
   },
   onShow() { this.loadSchedule() },
   async loadSchedule() {
     const res = await cloud.getSchedule()
     if (res.code === 0) {
       this.setData({ scheduleMap: res.data })
-      this.renderWeek()
+      this.renderDays()
     }
   },
-  renderWeek() {
-    const now = new Date()
-    now.setDate(now.getDate() + this.data.weekOffset * 7)
-    const startOfWeek = new Date(now)
-    startOfWeek.setDate(now.getDate() - now.getDay())
-
+  renderDays() {
+    const today = new Date()
+    const todayStr = this.dateStr(today)
     const days = []
-    const todayStr = this.dateStr(new Date())
-    for (let i = 0; i < 7; i++) {
-      const d = new Date(startOfWeek)
-      d.setDate(startOfWeek.getDate() + i)
+    for (let i = 0; i < 4; i++) {
+      const d = new Date(today)
+      d.setDate(today.getDate() + i)
       const dateStr = this.dateStr(d)
+      const daySchedule = this.data.scheduleMap[dateStr] || []
       days.push({
         date: dateStr,
         dow: DOWS[d.getDay()],
         day: String(d.getDate()).padStart(2, '0'),
         isToday: dateStr === todayStr,
-        active: dateStr === this.data.selectedDate || (!this.data.selectedDate && d.getDay() === now.getDay()),
-        cls: dateStr === (this.data.selectedDate || this.dateStr(now)) ? 'day-active' :
-             dateStr === todayStr ? 'day-today' : 'day-off'
+        active: dateStr === (this.data.selectedDate || todayStr),
+        count: daySchedule.length
       })
     }
-
-    const activeDay = days.find(d => d.active) || days[0]
-    const weekLabel = days[0].date + ' ~ ' + days[6].date
+    const activeDate = this.data.selectedDate || todayStr
     this.setData({
-      weekDays: days, weekLabel,
-      selectedDate: activeDay.date,
-      daySchedule: this.data.scheduleMap[activeDay.date] || []
+      days,
+      selectedDate: activeDate,
+      daySchedule: this.data.scheduleMap[activeDate] || []
     })
   },
   selectDay(e) {
@@ -57,20 +51,14 @@ Page({
       selectedDate: date,
       daySchedule: this.data.scheduleMap[date] || []
     })
-    this.renderWeek()
+    this.renderDays()
   },
-  prevWeek() {
-    this.setData({ weekOffset: this.data.weekOffset - 1 })
-    this.renderWeek()
+  showDetail(e) {
+    this.setData({ showModal: true, modalData: e.currentTarget.dataset.item })
   },
-  nextWeek() {
-    this.setData({ weekOffset: this.data.weekOffset + 1 })
-    this.renderWeek()
-  },
+  closeModal() { this.setData({ showModal: false }) },
+  stopProp() {},
   dateStr(d) {
-    const y = d.getFullYear()
-    const m = String(d.getMonth() + 1).padStart(2, '0')
-    const day = String(d.getDate()).padStart(2, '0')
-    return y + '-' + m + '-' + day
+    return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0')
   }
 })

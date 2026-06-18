@@ -14,6 +14,7 @@
     <view class="mcard-info">📱 {{item.phone}}</view>
     <view wx:if="{{item.remark}}" class="mcard-info">💬 {{item.remark}}</view>
 
+    <view wx:if="{{item.sameSlotCount>0}}" class="slot-hint">👥 当前时段已有 {{item.sameSlotCount}} 人预约</view>
     <view wx:if="{{item.status==='pending'}}" class="action-row">
       <view class="abtn abtn-accept" bindtap="acceptBooking" data-id="{{item._id}}">✓ 接受</view>
       <view class="abtn abtn-reject" bindtap="rejectBooking" data-id="{{item._id}}">✗ 拒绝</view>

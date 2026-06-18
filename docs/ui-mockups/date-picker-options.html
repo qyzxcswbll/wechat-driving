@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>日期时间选择器 · 方案对比</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f5f5f7;padding:32px 16px;color:#1a1a1a}
+.container{max-width:480px;margin:0 auto}
+h1{font-size:20px;font-weight:600;color:#1a1a1a;margin-bottom:4px;text-align:center}
+.subtitle{font-size:13px;color:#888;text-align:center;margin-bottom:32px}
+.section-title{font-size:14px;font-weight:600;color:#333;margin:28px 0 12px;padding-bottom:8px;border-bottom:2px solid #534AB7}
+.card{background:#fff;border-radius:16px;padding:20px;margin-bottom:20px;box-shadow:0 2px 12px rgba(0,0,0,.06)}
+
+/* 方案A：日期横排+时间按钮 */
+.plan-a-date-row{display:flex;gap:8px;overflow-x:auto;padding-bottom:4px}
+.plan-a-date-item{flex-shrink:0;width:80px;padding:12px 0;text-align:center;border-radius:12px;border:2px solid #e8e8e8;background:#fff}
+.plan-a-date-item.active{background:#534AB7;border-color:#534AB7;color:#fff}
+.plan-a-date-item .dow{font-size:11px;color:#888;margin-bottom:4px}
+.plan-a-date-item.active .dow{color:rgba(255,255,255,.7)}
+.plan-a-date-item .day{font-size:18px;font-weight:600;color:#333}
+.plan-a-date-item.active .day{color:#fff}
+.plan-a-time-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px}
+.plan-a-time-slot{padding:12px;text-align:center;border-radius:10px;border:2px solid #e8e8e8;font-size:14px;color:#333;background:#fff}
+.plan-a-time-slot.selected{background:#534AB7;color:#fff;border-color:#534AB7}
+
+/* 方案B：紧凑卡片式 */
+.plan-b-container{display:flex;gap:8px}
+.plan-b-date{flex:1;border-radius:12px;border:2px solid #e8e8e8;padding:12px 8px;text-align:center}
+.plan-b-date.active{background:#534AB7;border-color:#534AB7;color:#fff}
+.plan-b-date .dow{font-size:12px;color:#888;margin-bottom:2px}
+.plan-b-date.active .dow{color:rgba(255,255,255,.7)}
+.plan-b-date .day{font-size:22px;font-weight:700;color:#333}
+.plan-b-date.active .day{color:#fff}
+.plan-b-date .month{font-size:11px;color:#aaa;margin-top:2px}
+.plan-b-time-picker{display:flex;gap:8px;margin-top:12px;align-items:center}
+.plan-b-time-block{flex:1;padding:14px;border-radius:12px;border:2px solid #e8e8e8;text-align:center;font-size:16px;color:#333;background:#fff}
+.plan-b-time-block span{color:#888;font-size:12px}
+
+/* 方案C：三段式 */
+.plan-c-section{margin-bottom:16px}
+.plan-c-label{font-size:12px;color:#888;margin-bottom:8px;font-weight:500}
+.plan-c-pills{display:flex;gap:8px;flex-wrap:wrap}
+.plan-c-pill{padding:10px 18px;border-radius:20px;border:2px solid #e8e8e8;font-size:14px;color:#555;background:#fff}
+.plan-c-pill.active{background:#534AB7;color:#fff;border-color:#534AB7}
+.plan-c-time-input{display:flex;gap:8px;align-items:center}
+.plan-c-time-box{flex:1;background:#f8f8f8;border:2px solid #e8e8e8;border-radius:12px;padding:14px;text-align:center;font-size:16px;color:#333}
+.plan-c-time-box:first-child{border-top-right-radius:0;border-bottom-right-radius:0}
+.plan-c-time-box:last-child{border-top-left-radius:0;border-bottom-left-radius:0}
+.plan-c-time-sep{font-size:20px;color:#888;padding:0 4px}
+
+/* 方案D：下拉选择器模拟 */
+.plan-d-picker{border:2px solid #e8e8e8;border-radius:12px;padding:14px 16px;display:flex;justify-content:space-between;align-items:center;background:#fff}
+.plan-d-picker-text{font-size:16px;color:#333}
+.plan-d-picker-arrow{color:#aaa;font-size:18px}
+.plan-d-row{display:flex;gap:8px;margin-top:8px}
+.plan-d-picker{flex:1}
+
+.plan-label{display:inline-block;background:#EEEDFE;color:#534AB7;border-radius:6px;padding:2px 8px;font-size:11px;font-weight:500;margin-bottom:8px}
+.tag{display:inline-block;background:#fee;color:#c44;border-radius:4px;padding:1px 6px;font-size:10px;margin-left:4px}
+</style>
+</head>
+<body>
+<div class="container">
+
+<h1>📅 日期时间选择器 · 方案对比</h1>
+<p class="subtitle">选一个你最喜欢的样式，我把它做到小程序里</p>
+
+<!-- 方案A -->
+<div class="card">
+  <div class="plan-label">方案 A · 推荐</div>
+  <div class="plan-a-date-row">
+    <div class="plan-a-date-item">
+      <div class="dow">周四</div>
+      <div class="day">18</div>
+    </div>
+    <div class="plan-a-date-item">
+      <div class="dow">周五</div>
+      <div class="day">19</div>
+    </div>
+    <div class="plan-a-date-item active">
+      <div class="dow">周六</div>
+      <div class="day">20</div>
+    </div>
+    <div class="plan-a-date-item">
+      <div class="dow">周日</div>
+      <div class="day">21</div>
+    </div>
+    <div class="plan-a-date-item">
+      <div class="dow">周一</div>
+      <div class="day">22</div>
+    </div>
+  </div>
+  <div class="plan-a-time-grid">
+    <div class="plan-a-time-slot selected">08:00</div>
+    <div class="plan-a-time-slot">09:00</div>
+    <div class="plan-a-time-slot">10:00</div>
+    <div class="plan-a-time-slot">14:00</div>
+    <div class="plan-a-time-slot">15:00</div>
+    <div class="plan-a-time-slot">16:00</div>
+  </div>
+  <div style="font-size:12px;color:#888;margin-top:10px;">已选：周六 6月20日 08:00</div>
+</div>
+
+<!-- 方案B -->
+<div class="card">
+  <div class="plan-label">方案 B</div>
+  <div class="plan-b-container">
+    <div class="plan-b-date">
+      <div class="dow">周四</div>
+      <div class="day">18</div>
+      <div class="month">6月</div>
+    </div>
+    <div class="plan-b-date">
+      <div class="dow">周五</div>
+      <div class="day">19</div>
+      <div class="month">6月</div>
+    </div>
+    <div class="plan-b-date active">
+      <div class="dow">周六</div>
+      <div class="day">20</div>
+      <div class="month">6月</div>
+    </div>
+    <div class="plan-b-date">
+      <div class="dow">周日</div>
+      <div class="day">21</div>
+      <div class="month">6月</div>
+    </div>
+  </div>
+  <div class="plan-b-time-picker">
+    <div class="plan-b-time-block" style="background:#534AB7;color:#fff;border-color:#534AB7;">08:00</div>
+    <div class="plan-b-time-block">09:00</div>
+    <div class="plan-b-time-block">10:00</div>
+  </div>
+  <div style="font-size:11px;color:#aaa;margin-top:8px;text-align:center;">滑动查看更多时间</div>
+</div>
+
+<!-- 方案C -->
+<div class="card">
+  <div class="plan-label">方案 C</div>
+  <div class="plan-c-section">
+    <div class="plan-c-label">选择日期</div>
+    <div class="plan-c-pills">
+      <div class="plan-c-pill">周四 6/18</div>
+      <div class="plan-c-pill">周五 6/19</div>
+      <div class="plan-c-pill active">周六 6/20</div>
+      <div class="plan-c-pill">周日 6/21</div>
+    </div>
+  </div>
+  <div class="plan-c-section">
+    <div class="plan-c-label">选择时间</div>
+    <div class="plan-c-time-input">
+      <div class="plan-c-time-box" style="background:#534AB7;color:#fff;border-color:#534AB7;">08</div>
+      <div class="plan-c-time-sep">:</div>
+      <div class="plan-c-time-box">00</div>
+    </div>
+  </div>
+  <div style="font-size:12px;color:#888;margin-top:8px;">⚠️ 时/分单独选，可精确到分钟</div>
+</div>
+
+<!-- 方案D -->
+<div class="card">
+  <div class="plan-label">方案 D</div>
+  <div class="plan-c-label">选择日期</div>
+  <div class="plan-d-picker">
+    <span class="plan-d-picker-text">📅 2026年6月20日 周六</span>
+    <span class="plan-d-picker-arrow">▼</span>
+  </div>
+  <div style="margin-top:8px;">
+    <div class="plan-c-label">选择时间</div>
+    <div class="plan-d-picker">
+      <span class="plan-d-picker-text">⏰ 08:00</span>
+      <span class="plan-d-picker-arrow">▼</span>
+    </div>
+  </div>
+  <div style="font-size:12px;color:#888;margin-top:8px;">使用系统级 picker，最稳定</div>
+</div>
+
+<div style="background:#EEEDFE;border-radius:12px;padding:16px;margin-top:20px;font-size:13px;color:#3C3489;line-height:1.7;">
+<strong>我的建议：</strong>选方案 A。日期横排带星期几，时间用网格按钮点选。<br>
+这种设计直观、操作快、学员不需要用系统滚动选择器慢慢滚。<br><br>
+选好了告诉我，我直接做到小程序里。
+</div>
+
+</div>
+</body>
+</html>

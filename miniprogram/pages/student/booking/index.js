@@ -1,12 +1,22 @@
 const cloud = require('../../../utils/cloud')
 const app = getApp()
+const DOWS = ['日', '一', '二', '三', '四', '五', '六']
+
+function dateDisplay(d) {
+  if (!d) return '📅 选择日期'
+  const parts = d.split('-')
+  const dt = new Date(parseInt(parts[0]), parseInt(parts[1])-1, parseInt(parts[2]))
+  return '📅 ' + parseInt(parts[1]) + '月' + parseInt(parts[2]) + '日 周' + DOWS[dt.getDay()]
+}
+function timeDisplay(t) { return t ? '⏰ ' + t : '⏰ 选择时间' }
+function emptySlot() { return { date: '', time: '', remark: '', dateDisplay: '📅 选择日期', timeDisplay: '⏰ 选择时间' } }
 
 Page({
   data: {
     subject: '科目二',
     gear: '自动挡',
     remark: '',
-    slots: [{ date: '', time: '', remark: '' }],
+    slots: [emptySlot()],
     studentName: '',
     gender: '先生',
     nickName: '',
@@ -31,7 +41,11 @@ Page({
   onRemarkInput(e) { this.setData({ remark: e.detail.value }) },
   onTimeChange(e) {
     const idx = e.currentTarget.dataset.index
-    this.setData({ ['slots[' + idx + '].time']: e.detail.value })
+    const time = e.detail.value
+    this.setData({
+      ['slots[' + idx + '].time']: time,
+      ['slots[' + idx + '].timeDisplay']: timeDisplay(time)
+    })
   },
   onSlotRemark(e) {
     const idx = e.currentTarget.dataset.index
@@ -39,10 +53,14 @@ Page({
   },
   onDateChange(e) {
     const idx = e.currentTarget.dataset.index
-    this.setData({ ['slots[' + idx + '].date']: e.detail.value })
+    const date = e.detail.value
+    this.setData({
+      ['slots[' + idx + '].date']: date,
+      ['slots[' + idx + '].dateDisplay']: dateDisplay(date)
+    })
   },
   addSlot() {
-    const slots = [...this.data.slots, { date: '', time: '', remark: '' }]
+    const slots = [...this.data.slots, emptySlot()]
     this.setData({ slots })
   },
   removeSlot(e) {

@@ -43,14 +43,14 @@
   <view wx:for="{{slots}}" wx:key="index" class="slot-card">
     <view class="slot-row">
       <picker mode="date" value="{{item.date}}" bindchange="onDateChange" data-index="{{index}}">
-        <view class="slot-date">📅 {{item.date || '选择日期'}}</view>
+        <view class="picker-btn">{{item.dateDisplay}}</view>
       </picker>
       <picker mode="time" value="{{item.time}}" bindchange="onTimeChange" data-index="{{index}}">
-        <view class="slot-time">{{item.time || '选择时间'}}</view>
+        <view class="picker-btn">{{item.timeDisplay}}</view>
       </picker>
     </view>
     <view class="slot-remark-row">
-      <input class="field-input" placeholder="此日期备注（可选）" value="{{item.remark}}" bindinput="onSlotRemark" data-index="{{index}}" />
+      <input class="field-input" placeholder="备注（可选）" value="{{item.remark}}" bindinput="onSlotRemark" data-index="{{index}}" />
       <view wx:if="{{slots.length>1}}" class="slot-del" bindtap="removeSlot" data-index="{{index}}">删除</view>
     </view>
   </view>

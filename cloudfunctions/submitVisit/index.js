@@ -2,6 +2,11 @@ const cloud = require('wx-server-sdk')
 cloud.init({ env: cloud.DYNAMIC_CURRENT_ENV })
 const db = cloud.database()
 
+function fmtTime(d) {
+  const pad = n => String(n).padStart(2, '0')
+  return d.getFullYear() + '-' + pad(d.getMonth()+1) + '-' + pad(d.getDate()) + ' ' + pad(d.getHours()) + ':' + pad(d.getMinutes()) + ':' + pad(d.getSeconds())
+}
+
 exports.main = async (event) => {
   const { OPENID } = cloud.getWXContext()
   const { phone, remark } = event
@@ -46,11 +51,11 @@ exports.main = async (event) => {
         page: 'pages/admin/visits/index',
         data: {
           thing1: { value: '参观咨询' },
-          phrase2: { value: '新咨询待回复' },
-          time3: { value: new Date().toLocaleString('zh-CN') }
+          phrase2: { value: '待回复' },
+          time3: { value: fmtTime(new Date()) }
         }
       })
-      notifyResult += ' | 发送结果: ' + JSON.stringify(sendRes)
+      notifyResult += ' | 发送成功'
     } else {
       notifyResult = '未找到管理员记录'
     }

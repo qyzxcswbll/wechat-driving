@@ -28,8 +28,31 @@ Page({
     }
   },
   async loadStudents() {
-    const res = await cloud.setupGetAllStudents({ limit: 20, offset: 0 })
-    if (res.code === 0) this.setData({ students: res.data, studentTotal: res.total, studentOffset: 20 })
+    const [sRes, aRes] = await Promise.all([
+      cloud.setupGetAllStudents({ limit: 20, offset: 0 }),
+      cloud.setupGetAdmins()
+    ])
+    if (sRes.code === 0) {
+      const adminOpenids = (aRes.code === 0 ? aRes.data : []).map(a => a.openid)
+      const students = sRes.data.map(s => ({ ...s, isAdmin: adminOpenids.includes(s.openid) }))
+      this.setData({ students, studentTotal: sRes.total, studentOffset: 20 })
+    }
+  },
+  async loadMoreStudents() {
+    wx.showLoading({ title: '加载中...' })
+    const [sRes, aRes] = await Promise.all([
+      cloud.setupGetAllStudents({ limit: 20, offset: this.data.studentOffset }),
+      cloud.setupGetAdmins()
+    ])
+    wx.hideLoading()
+    if (sRes.code === 0) {
+      const adminOpenids = (aRes.code === 0 ? aRes.data : []).map(a => a.openid)
+      const more = sRes.data.map(s => ({ ...s, isAdmin: adminOpenids.includes(s.openid) }))
+      this.setData({
+        students: [...this.data.students, ...more],
+        studentOffset: this.data.studentOffset + 20
+      })
+    }
   },
   async loadMoreStudents() {
     wx.showLoading({ title: '加载中...' })

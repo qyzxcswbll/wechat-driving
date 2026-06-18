@@ -20,6 +20,7 @@ module.exports = {
   cancelBooking: (id) => call('cancelBooking', { bookingId: id }),
   setupVerify: (password) => call('setupVerify', { password }),
   setupGetAllStudents: (data) => call('setupGetAllStudents', data),
+  setupGetAdmins: () => call('setupGetAdmins'),
   setupSetAdmin: (openid) => call('setupSetAdmin', { openid }),
   setupUpdateSchool: (data) => call('setupUpdateSchool', data)
 }

@@ -22,6 +22,11 @@ Page({
     this.loadData()  // 切换Tab时重新加载
   },
   goDetail(e) { wx.navigateTo({ url: '../booking-detail/index?id=' + e.currentTarget.dataset.id }) },
+  subscribeMsg() {
+    wx.requestSubscribeMessage({
+      tmplIds: ['0TTCrbD9ZDJTjouXteF5BXoeZZxV2mgG461In1BkPYo']
+    })
+  },
   async cancelBooking(e) {
     const res = await wx.showModal({ title: '取消预约', content: '确定取消这个预约吗？', confirmText: '确定取消', confirmColor: '#A32D2D' })
     if (!res.confirm) return

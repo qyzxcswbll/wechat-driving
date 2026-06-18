@@ -36,5 +36,6 @@
       <view class="booking-time">🕐 {{item.createdAt}}</view>
     </view>
   </view>
+  <view class="notify-bar" bindtap="subscribeMsg">🔔 如未收到通知，点此重新授权</view>
 </view>
 <nav-bar activeTab="my" items="{{navItems}}" />

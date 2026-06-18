@@ -2,9 +2,17 @@
   <view class="splash-icon">🚗</view>
   <view class="splash-title">平安驾校</view>
   <view class="splash-sub">学车预约小程序</view>
-  <view class="notify-box" wx:if="{{showNotify}}">
-    <view class="notify-text">开启通知，及时获取预约审核结果</view>
+
+  <!-- 未登录：显示登录按钮 -->
+  <view wx:if="{{!loggedIn}}" class="login-box">
+    <button class="login-btn" bindtap="doLogin">微信一键登录</button>
+    <view class="login-desc">授权后自动识别身份</view>
+  </view>
+
+  <!-- 已登录：显示通知授权 -->
+  <view wx:if="{{loggedIn && showNotify}}" class="notify-box">
+    <view class="notify-text">🔔 开启通知，及时获取预约审核结果</view>
     <view class="notify-btn" bindtap="enableNotify">✅ 开启通知提醒</view>
-    <view class="skip-btn" bindtap="goHome">跳过</view>
+    <view class="skip-btn" bindtap="goHome">暂不开启</view>
   </view>
 </view>

@@ -1,16 +1,11 @@
 const app = getApp()
 Page({
-  data: { showNotify: true },
-  onLoad() {
-    // 先尝试自动登录，获取用户信息后再显示通知授权
-    this.doLogin()
-  },
+  data: { loggedIn: false, showNotify: false },
   async doLogin() {
-    wx.showLoading({ title: '加载中...' })
+    wx.showLoading({ title: '登录中...' })
     await app.checkAuth()
     wx.hideLoading()
-    // 登录完成后才显示通知授权按钮（此时已知是学员还是教练）
-    this.setData({ showNotify: true })
+    this.setData({ loggedIn: true, showNotify: true })
   },
   enableNotify() {
     wx.requestSubscribeMessage({

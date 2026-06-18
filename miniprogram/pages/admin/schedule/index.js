@@ -23,14 +23,15 @@ Page({
     }
   },
   renderWeek(offsetDays) {
-    // offsetDays: 从今天偏移的天数（用于点"选择月份"后跳转）
+    // offsetDays: 选中日期在整体日期列表中的偏移
     const today = new Date()
     const todayStr = this.dateStr(today)
-    const startDay = new Date(today)
-    startDay.setDate(today.getDate() + offsetDays)
 
+    // 生成前后各30天，共61天
     const days = []
-    for (let i = 0; i < 7; i++) {
+    const startDay = new Date(today)
+    startDay.setDate(today.getDate() - 30)
+    for (let i = 0; i < 61; i++) {
       const d = new Date(startDay)
       d.setDate(startDay.getDate() + i)
       const dateStr = this.dateStr(d)
@@ -46,11 +47,15 @@ Page({
     }
 
     const activeDate = this.data.selectedDate || todayStr
-    const weekLabel = days[0].date + ' - ' + days[6].date
+    // 找到选中日期的索引，滚动到它居中显示
+    const activeIdx = days.findIndex(d => d.active)
+    const scrollTarget = Math.max(0, activeIdx * 116 - 200)
+
     this.setData({
-      days, weekLabel, selectedDate: activeDate,
+      days, selectedDate: activeDate,
       groupedSchedule: this.buildGrouped(this.data.scheduleMap[activeDate] || []),
-      dayTotal: (this.data.scheduleMap[activeDate] || []).length
+      dayTotal: (this.data.scheduleMap[activeDate] || []).length,
+      scrollLeft: scrollTarget
     })
   },
   buildGrouped(schedule) {

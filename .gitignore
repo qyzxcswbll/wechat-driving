@@ -1,3 +1,4 @@
 node_modules/
 .miniprogram/
 .superpowers/
+.mcp.json

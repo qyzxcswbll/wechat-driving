@@ -73,8 +73,9 @@ Page({
     })
     wx.hideLoading()
     if (res.code === 0) {
+      wx.setStorageSync('lastNotify', res.notify || '')
       wx.requestSubscribeMessage({
-        tmplIds: [],
+        tmplIds: ['YykAWegLbr7X6xuJpCUXSJbOqy_RZZweGkiELM8W1I0'],
         complete: () => {
           wx.showToast({ title: '成功提交' + validSlots.length + '节预约' })
           setTimeout(() => wx.navigateBack(), 1500)

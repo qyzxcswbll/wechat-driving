@@ -45,13 +45,19 @@
       <picker mode="date" value="{{item.date}}" bindchange="onDateChange" data-index="{{index}}">
         <view class="picker-btn">{{item.dateDisplay}}</view>
       </picker>
-      <picker mode="time" value="{{item.time}}" bindchange="onTimeChange" data-index="{{index}}">
-        <view class="picker-btn">{{item.timeDisplay}}</view>
-      </picker>
+      <view class="picker-btn" bindtap="onToggleTimePicker" data-index="{{index}}">{{item.timeDisplay}}</view>
     </view>
     <view class="slot-remark-row">
       <input class="field-input" placeholder="备注（可选）" value="{{item.remark}}" bindinput="onSlotRemark" data-index="{{index}}" />
       <view wx:if="{{slots.length>1}}" class="slot-del" bindtap="removeSlot" data-index="{{index}}">删除</view>
+    </view>
+    <view wx:if="{{item.showTimePicker}}" class="time-picker-overlay">
+      <scroll-view scroll-y class="time-picker-scroll">
+        <view wx:for="{{timeOptions}}" wx:key="*this" class="time-opt {{item.time===timeOptions[index]?'selected':''}}"
+          bindtap="onSelectTime" data-slot-index="{{../index}}" data-time="{{item}}">
+          {{item}}
+        </view>
+      </scroll-view>
     </view>
   </view>
 

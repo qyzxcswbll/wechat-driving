@@ -2,6 +2,12 @@ const cloud = require('../../../utils/cloud')
 const app = getApp()
 const DOWS = ['日', '一', '二', '三', '四', '五', '六']
 
+// 生成整点和半点时间列表
+const TIME_OPTIONS = []
+for (let h = 0; h < 24; h++) {
+  TIME_OPTIONS.push(String(h).padStart(2,'0') + ':00')
+}
+
 function dateDisplay(d) {
   if (!d) return '📅 选择日期'
   const parts = d.split('-')
@@ -9,7 +15,7 @@ function dateDisplay(d) {
   return '📅 ' + parseInt(parts[1]) + '月' + parseInt(parts[2]) + '日 周' + DOWS[dt.getDay()]
 }
 function timeDisplay(t) { return t ? '⏰ ' + t : '⏰ 选择时间' }
-function emptySlot() { return { date: '', time: '', remark: '', dateDisplay: '📅 选择日期', timeDisplay: '⏰ 选择时间' } }
+function emptySlot() { return { date: '', time: '', remark: '', dateDisplay: '📅 选择日期', timeDisplay: '⏰ 选择时间', showTimePicker: false } }
 
 Page({
   data: {
@@ -20,7 +26,8 @@ Page({
     studentName: '',
     gender: '先生',
     nickName: '',
-    phone: ''
+    phone: '',
+    timeOptions: TIME_OPTIONS
   },
   onLoad() {
     const ui = app.globalData.userInfo
@@ -39,13 +46,26 @@ Page({
   onNameInput(e) { this.setData({ studentName: e.detail.value }) },
   onPhoneInput(e) { this.setData({ phone: e.detail.value }) },
   onRemarkInput(e) { this.setData({ remark: e.detail.value }) },
-  onTimeChange(e) {
+  onToggleTimePicker(e) {
     const idx = e.currentTarget.dataset.index
-    const time = e.detail.value
+    this.setData({
+      ['slots[' + idx + '].showTimePicker']: !this.data.slots[idx].showTimePicker
+    })
+  },
+  onSelectTime(e) {
+    const idx = e.currentTarget.dataset.slotIndex
+    const time = e.currentTarget.dataset.time
     this.setData({
       ['slots[' + idx + '].time']: time,
-      ['slots[' + idx + '].timeDisplay']: timeDisplay(time)
+      ['slots[' + idx + '].timeDisplay']: timeDisplay(time),
+      ['slots[' + idx + '].showTimePicker']: false
     })
+  },
+  onCloseTimePicker(e) {
+    const idx = e.currentTarget.dataset.slotIndex
+    if (idx !== undefined) {
+      this.setData({ ['slots[' + idx + '].showTimePicker']: false })
+    }
   },
   onSlotRemark(e) {
     const idx = e.currentTarget.dataset.index

@@ -5,7 +5,7 @@
     <view style="font-size:36rpx;font-weight:600;color:#333;text-align:center;margin-bottom:32rpx;">🔐 管理设置</view>
     <view class="field">
       <view class="field-label">请输入管理密码</view>
-      <input class="field-input" placeholder="输入密码" type="number" password="{{true}}" bindinput="onPwdInput" />
+      <input class="field-input" placeholder="输入密码" type="text" password="{{true}}" bindinput="onPwdInput" />
     </view>
     <button class="btn-primary" bindtap="verifyPwd">验证</button>
   </view>

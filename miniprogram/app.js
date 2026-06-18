@@ -7,12 +7,10 @@ App({
     wx.cloud.init({ env: CLOUD_ENV })
   },
   async checkAuth() {
-    wx.showLoading({ title: '加载中...' })
     const res = await cloud.login({
       nickName: this.globalData.userInfo?.nickName || '',
       avatarUrl: this.globalData.userInfo?.avatarUrl || ''
     })
-    wx.hideLoading()
     if (res.code === 0) {
       this.globalData.isAdmin = res.data.isAdmin
       this.globalData.userInfo = res.data.userInfo

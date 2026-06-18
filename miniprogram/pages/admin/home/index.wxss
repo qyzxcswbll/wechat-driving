@@ -14,3 +14,4 @@
 .menu-item text { display: block; }
 .menu-icon { font-size: 48rpx; margin-bottom: 12rpx; }
 .menu-label { font-size: 24rpx; color: #085041; }
+.notify-bar { margin-top: 32rpx; padding: 28rpx; background: #fff; border: 2rpx solid #e8e8e8; border-radius: 20rpx; text-align: center; }

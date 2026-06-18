@@ -7,14 +7,10 @@ const NAV_ITEMS = [
 ]
 Page({
   data: { pendingCount: 0, visitCount: 0, confirmedCount: 0, navItems: NAV_ITEMS },
-  onShow() {
-    this.loadStats()
-    this.subscribeMsg()
-  },
+  onShow() { this.loadStats() },
   subscribeMsg() {
     wx.requestSubscribeMessage({
-      tmplIds: ['0TTCrbD9ZDJTjouXteF5BXoeZZxV2mgG461In1BkPYo'],
-      fail: () => {}
+      tmplIds: ['0TTCrbD9ZDJTjouXteF5BXoeZZxV2mgG461In1BkPYo']
     })
   },
   async loadStats() {

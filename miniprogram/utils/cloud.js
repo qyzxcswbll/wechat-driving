@@ -19,7 +19,7 @@ module.exports = {
   sendNotify: (data) => call('sendNotify', data),
   cancelBooking: (id) => call('cancelBooking', { bookingId: id }),
   setupVerify: (password) => call('setupVerify', { password }),
-  setupGetAllStudents: () => call('setupGetAllStudents'),
+  setupGetAllStudents: (data) => call('setupGetAllStudents', data),
   setupSetAdmin: (openid) => call('setupSetAdmin', { openid }),
   setupUpdateSchool: (data) => call('setupUpdateSchool', data)
 }

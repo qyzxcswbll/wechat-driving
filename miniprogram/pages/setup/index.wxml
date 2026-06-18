@@ -25,6 +25,7 @@
         </view>
         <view class="set-btn" bindtap="setAsAdmin" data-openid="{{item.openid}}">设为教练</view>
       </view>
+      <view wx:if="{{studentOffset < studentTotal}}" class="load-more" bindtap="loadMoreStudents">加载更多学员 ({{students.length}}/{{studentTotal}})</view>
       <view wx:if="{{setMsg}}" style="margin-top:16rpx;font-size:24rpx;color:#0F6E56;">{{setMsg}}</view>
     </view>
 

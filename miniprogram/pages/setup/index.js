@@ -4,7 +4,7 @@ Page({
   data: {
     authed: false, showQrModal: false,
     password: '',
-    students: [],
+    students: [], studentTotal: 0, studentOffset: 0,
     setMsg: '',
     saveMsg: '',
     form: { name: '', phone: '', schoolName: '', address: '', intro: '', wechatQR: '' }
@@ -28,8 +28,19 @@ Page({
     }
   },
   async loadStudents() {
-    const res = await cloud.setupGetAllStudents()
-    if (res.code === 0) this.setData({ students: res.data })
+    const res = await cloud.setupGetAllStudents({ limit: 20, offset: 0 })
+    if (res.code === 0) this.setData({ students: res.data, studentTotal: res.total, studentOffset: 20 })
+  },
+  async loadMoreStudents() {
+    wx.showLoading({ title: '加载中...' })
+    const res = await cloud.setupGetAllStudents({ limit: 20, offset: this.data.studentOffset })
+    wx.hideLoading()
+    if (res.code === 0) {
+      this.setData({
+        students: [...this.data.students, ...res.data],
+        studentOffset: this.data.studentOffset + 20
+      })
+    }
   },
   async loadSchoolInfo() {
     const res = await cloud.getSchoolInfo()

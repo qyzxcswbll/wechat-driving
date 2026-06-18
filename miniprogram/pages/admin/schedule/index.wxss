@@ -1,32 +1,52 @@
-.page { padding: 32rpx 32rpx 140rpx; }
-.cal-card { background: #fff; border-radius: 24rpx; padding: 28rpx; border: 2rpx solid #e8e8e8; }
-.cal-row { display: flex; gap: 8rpx; }
-.cal-day { flex: 1; padding: 16rpx 4rpx; text-align: center; font-size: 22rpx; border-radius: 12rpx; position: relative; }
-.cal-dow { display: block; }
-.cal-date { display: block; margin-top: 4rpx; font-size: 24rpx; font-weight: 600; }
-.cal-count { display: block; font-size: 18rpx; margin-top: 4rpx; opacity: .8; }
-.day-off { background: #f8f8f8; color: #666; border: 2rpx solid #e8e8e8; }
-.day-active { background: #0F6E56; color: #fff; }
-.day-today { background: #E1F5EE; color: #0F6E56; border: 2rpx solid #9FE1CB; }
-.section-title { font-size: 30rpx; font-weight: 500; color: #333; margin: 32rpx 0 20rpx; }
-.empty-card { background: #fff; border-radius: 24rpx; padding: 80rpx; text-align: center; border: 2rpx solid #e8e8e8; }
+.page { padding: 32rpx 0 140rpx; }
+.month-label { font-size: 36rpx; font-weight: 700; color: #222; padding: 0 32rpx; margin-bottom: 24rpx; }
+
+/* 可滑动日期条 */
+.date-strip { white-space: nowrap; padding: 0 24rpx; margin-bottom: 32rpx; }
+.date-card { display: inline-flex; flex-direction: column; align-items: center; width: 100rpx; padding: 16rpx 0; margin: 0 6rpx; border-radius: 16rpx; background: #f8f8f8; border: 2rpx solid #e8e8e8; }
+.date-card.active { background: #0F6E56; border-color: #0F6E56; }
+.date-card.today:not(.active) { background: #E1F5EE; border-color: #9FE1CB; }
+.dc-dow { font-size: 22rpx; color: #888; margin-bottom: 4rpx; }
+.date-card.active .dc-dow { color: rgba(255,255,255,.8); }
+.date-card.today:not(.active) .dc-dow { color: #0F6E56; }
+.dc-day { font-size: 30rpx; font-weight: 700; color: #333; margin-bottom: 4rpx; }
+.date-card.active .dc-day { color: #fff; }
+.date-card.today:not(.active) .dc-day { color: #0F6E56; }
+.dc-count { font-size: 20rpx; color: #fff; background: #0F6E56; padding: 2rpx 12rpx; border-radius: 12rpx; }
+.date-card.active .dc-count { background: rgba(255,255,255,.3); }
+.dc-count.empty { background: transparent; color: #bbb; }
+
+/* 选中日期 */
+.selected-label { font-size: 28rpx; font-weight: 500; color: #555; padding: 0 32rpx; margin-bottom: 20rpx; }
+
+/* 空状态 */
+.empty-card { text-align: center; padding: 80rpx 0; }
 .empty-icon { font-size: 80rpx; display: block; margin-bottom: 16rpx; }
 .empty-text { font-size: 28rpx; color: #888; }
-.schedule-item { background: #fff; border-radius: 16rpx; padding: 24rpx; border: 2rpx solid #e8e8e8; margin-bottom: 12rpx; display: flex; justify-content: space-between; align-items: center; }
-.si-left { display: flex; flex-direction: column; gap: 4rpx; }
-.si-time { font-size: 26rpx; font-weight: 600; color: #0F6E56; }
-.si-name { font-size: 28rpx; color: #333; }
-.si-right { display: flex; align-items: center; gap: 8rpx; }
-.si-subject { font-size: 24rpx; color: #888; background: #E1F5EE; padding: 6rpx 16rpx; border-radius: 8rpx; }
-.si-arrow { font-size: 32rpx; color: #ccc; }
+
+/* 时间段分组 */
+.time-group { margin-bottom: 24rpx; padding: 0 32rpx; }
+.time-group-hd { font-size: 26rpx; font-weight: 600; color: #0F6E56; margin-bottom: 12rpx; padding-left: 8rpx; }
+
+/* 学员卡片 */
+.student-card { display: flex; justify-content: space-between; align-items: center; background: #fff; padding: 24rpx 24rpx; border-radius: 16rpx; border: 2rpx solid #e8e8e8; margin-bottom: 8rpx; }
+.sc-left { display: flex; flex-direction: column; gap: 4rpx; }
+.sc-name { font-size: 28rpx; font-weight: 500; color: #333; }
+.sc-subject { font-size: 24rpx; color: #888; }
+.sc-right { display: flex; align-items: center; gap: 16rpx; }
+.sc-phone { font-size: 36rpx; padding: 8rpx; }
+.sc-arrow { font-size: 32rpx; color: #ccc; }
 
 /* 弹窗 */
 .modal-mask { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,.4); z-index: 999; display: flex; align-items: center; justify-content: center; }
-.modal-box { background: #fff; border-radius: 24rpx; width: 600rpx; padding: 32rpx; }
+.modal-box { background: #fff; border-radius: 24rpx; width: 620rpx; padding: 32rpx; }
 .modal-hd { font-size: 32rpx; font-weight: 600; color: #333; text-align: center; margin-bottom: 24rpx; }
 .modal-body { border-top: 2rpx solid #f0f0f0; }
 .modal-row { display: flex; padding: 20rpx 0; border-bottom: 2rpx solid #f0f0f0; }
 .modal-row:last-child { border-bottom: none; }
 .ml { width: 120rpx; font-size: 26rpx; color: #888; flex-shrink: 0; }
 .mv { font-size: 26rpx; color: #333; }
-.modal-close { margin-top: 24rpx; padding: 20rpx; text-align: center; font-size: 28rpx; color: #0F6E56; font-weight: 500; }
+.modal-actions { margin-top: 24rpx; display: flex; gap: 16rpx; }
+.modal-btn { flex: 1; padding: 20rpx; border-radius: 14rpx; text-align: center; font-size: 28rpx; font-weight: 500; }
+.modal-btn.call { background: #0F6E56; color: #fff; }
+.modal-btn.close { background: #f0f0f0; color: #555; }

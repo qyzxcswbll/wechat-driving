@@ -57,26 +57,27 @@ Page({
     if (validSlots.length === 0) {
       return wx.showToast({ title: '请至少填写一个日期和时间', icon: 'none' })
     }
-    wx.showLoading({ title: '提交中...' })
-    const gearText = this.data.gear
-    const bookings = validSlots.map(s => ({
-      date: s.date, time: s.time,
-      subject: this.data.subject,
-      remark: (s.remark || this.data.remark) ? (s.remark || this.data.remark) + ' · ' + gearText : gearText
-    }))
-    const res = await cloud.submitBooking({
-      nickName: this.data.nickName,
-      studentName: this.data.studentName,
-      gender: this.data.gender,
-      phone: this.data.phone,
-      bookings
-    })
-    wx.hideLoading()
-    if (res.code === 0) {
-      // 申请订阅消息权限（学员同意后教练审核结果可通知到学员）
-      wx.requestSubscribeMessage({
-        tmplIds: ['YykAWegLbr7X6xuJpCUXSJbOqy_RZZweGkiELM8W1I0'],
-        complete: () => {
+
+    // 先申请订阅权限（必须在手势上下文中同步调用）
+    wx.requestSubscribeMessage({
+      tmplIds: ['YykAWegLbr7X6xuJpCUXSJbOqy_RZZweGkiELM8W1I0'],
+      complete: async () => {
+        wx.showLoading({ title: '提交中...' })
+        const gearText = this.data.gear
+        const bookings = validSlots.map(s => ({
+          date: s.date, time: s.time,
+          subject: this.data.subject,
+          remark: (s.remark || this.data.remark) ? (s.remark || this.data.remark) + ' · ' + gearText : gearText
+        }))
+        const res = await cloud.submitBooking({
+          nickName: this.data.nickName,
+          studentName: this.data.studentName,
+          gender: this.data.gender,
+          phone: this.data.phone,
+          bookings
+        })
+        wx.hideLoading()
+        if (res.code === 0) {
           const notifyMsg = res.notify ? '\n通知: ' + res.notify : ''
           wx.showModal({
             title: '提交成功',
@@ -84,10 +85,10 @@ Page({
             showCancel: false,
             success: () => setTimeout(() => wx.navigateBack(), 500)
           })
+        } else {
+          wx.showToast({ title: res.msg || '提交失败', icon: 'none' })
         }
-      })
-    } else {
-      wx.showToast({ title: res.msg || '提交失败', icon: 'none' })
-    }
+      }
+    })
   }
 })

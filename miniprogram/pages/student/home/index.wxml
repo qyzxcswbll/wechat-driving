@@ -8,6 +8,7 @@
     <view class="info-row"><text class="info-label">📍 地址</text><text class="info-val">{{schoolInfo.address}}</text></view>
     <view class="info-row"><text class="info-label">👨‍🏫 教练</text><text class="info-val">{{schoolInfo.coachName}}</text></view>
     <view class="info-row"><text class="info-label">📞 电话</text><text class="info-val">{{schoolInfo.phone}}</text></view>
+    <view class="info-row" wx:if="{{schoolInfo.intro}}"><text class="info-label">📖 简介</text><text class="info-val">{{schoolInfo.intro}}</text></view>
   </view>
 
   <view class="menu-grid">

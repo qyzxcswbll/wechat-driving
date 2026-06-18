@@ -14,7 +14,4 @@
 .login-btn { background: #534AB7; color: #fff; padding: 28rpx; border-radius: 20rpx; font-size: 32rpx; font-weight: 500; width: 100%; border: none; }
 .login-btn::after { border: none; }
 .login-desc { font-size: 24rpx; color: #999; margin-top: 20rpx; }
-.notify-box { text-align: center; width: 100%; }
-.notify-text { font-size: 26rpx; color: #555; margin-bottom: 32rpx; line-height: 1.6; }
-.notify-btn { background: #534AB7; color: #fff; padding: 28rpx; border-radius: 20rpx; font-size: 30rpx; font-weight: 500; margin-bottom: 20rpx; width: 100%; box-sizing: border-box; }
-.skip-btn { font-size: 26rpx; color: #999; padding: 16rpx; text-align: center; }
+.loading-text { font-size: 26rpx; color: #888; }

@@ -45,8 +45,8 @@
         <input class="field-input" value="{{form.phone}}" bindinput="onFormInput" data-field="phone" placeholder="联系电话" type="number" maxlength="11" />
       </view>
       <view class="field">
-        <view class="field-label">驾校名称</view>
-        <input class="field-input" value="{{form.schoolName}}" bindinput="onFormInput" data-field="schoolName" placeholder="输入驾校名称" />
+        <view class="field-label">APP名称</view>
+        <input class="field-input" value="{{form.schoolName}}" bindinput="onFormInput" data-field="schoolName" placeholder="如：平安驾校" />
       </view>
       <view class="field">
         <view class="field-label">驾校地址</view>

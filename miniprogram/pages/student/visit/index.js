@@ -38,13 +38,12 @@ Page({
         gender: this.data.gender,
         phone: this.data.phone
       }
-      wx.setStorageSync('lastNotify', res.notify || '')
-      wx.requestSubscribeMessage({
-        tmplIds: [],
-        complete: () => {
-          wx.showToast({ title: '提交成功' })
-          setTimeout(() => wx.navigateBack(), 1500)
-        }
+      const notifyMsg = res.notify ? '\n通知: ' + res.notify : ''
+      wx.showModal({
+        title: '提交成功',
+        content: '参观申请已提交' + notifyMsg,
+        showCancel: false,
+        success: () => setTimeout(() => wx.navigateBack(), 500)
       })
     } else {
       wx.showToast({ title: res.msg || '提交失败', icon: 'none' })

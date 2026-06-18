@@ -73,13 +73,12 @@ Page({
     })
     wx.hideLoading()
     if (res.code === 0) {
-      wx.setStorageSync('lastNotify', res.notify || '')
-      wx.requestSubscribeMessage({
-        tmplIds: ['YykAWegLbr7X6xuJpCUXSJbOqy_RZZweGkiELM8W1I0'],
-        complete: () => {
-          wx.showToast({ title: '成功提交' + validSlots.length + '节预约' })
-          setTimeout(() => wx.navigateBack(), 1500)
-        }
+      const notifyMsg = res.notify ? '\n通知: ' + res.notify : ''
+      wx.showModal({
+        title: '提交成功',
+        content: '成功提交' + validSlots.length + '节预约' + notifyMsg,
+        showCancel: false,
+        success: () => setTimeout(() => wx.navigateBack(), 500)
       })
     } else {
       wx.showToast({ title: res.msg || '提交失败', icon: 'none' })

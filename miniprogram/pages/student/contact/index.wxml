@@ -5,7 +5,7 @@
     <view wx:else class="qr-placeholder">微信二维码</view>
     <view class="hint">长按识别二维码添加微信</view>
     <view class="btn-copy" bindtap="copyWechat">📋 复制微信号</view>
-    <contact-button type="default-light" size="20" session-from="平安驾校咨询"></contact-button>
+    <button class="btn-feedback" open-type="contact" session-from="意见反馈">💬 联系客服</button>
   </view>
   <view class="card">
     <view class="btn-call" bindtap="callPhone" data-phone="{{info.phone}}">📞 拨打电话</view>

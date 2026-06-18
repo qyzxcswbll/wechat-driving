@@ -48,5 +48,27 @@ exports.main = async (event) => {
     })
     ids.push(result._id)
   }
+
+  // 通知教练
+  try {
+    const adminRes = await db.collection('admins').limit(1).get()
+    if (adminRes.data.length > 0) {
+      const admin = adminRes.data[0]
+      const first = bookings[0]
+      await cloud.openapi.subscribeMessage.send({
+        touser: admin.openid,
+        templateId: '0TTCrbD9ZDJTjouXteF5BXoeZZxV2mgG461In1BkPYo',
+        page: 'pages/admin/bookings/index',
+        data: {
+          thing1: { value: first.subject + ' 预约' },
+          phrase2: { value: '新预约待处理' },
+          time3: { value: new Date().toLocaleString('zh-CN') }
+        }
+      })
+    }
+  } catch (e) {
+    console.error('通知教练失败', e)
+  }
+
   return { code: 0, data: { ids } }
 }

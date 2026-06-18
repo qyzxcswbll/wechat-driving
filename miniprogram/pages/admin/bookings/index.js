@@ -29,15 +29,25 @@ Page({
   },
   async acceptBooking(e) {
     wx.showLoading({ title: '处理中...' })
-    await cloud.handleBooking(e.currentTarget.dataset.id, 'accepted')
+    const bookingId = e.currentTarget.dataset.id
+    await cloud.handleBooking(bookingId, 'accepted')
     wx.hideLoading()
     wx.showToast({ title: '已接受' })
-    // TODO: 配置微信订阅消息模板后，通知学员
-    // cloud.sendNotify({
-    //   openid: booking.openid,
-    //   templateId: 'TEMPLATE_ID',
-    //   data: { ... }
-    // })
+    // 通知学员
+    const booking = this.data.list.find(b => b._id === bookingId)
+    if (booking) {
+      cloud.sendNotify({
+        openid: booking.openid,
+        templateId: 'YykAWegLbr7X6xuJpCUXSJbOqy_RZZweGkiELM8W1I0',
+        page: 'pages/student/my-bookings/index',
+        data: {
+          thing1: { value: booking.subject },
+          date2: { value: booking.date },
+          date3: { value: booking.date + ' ' + booking.time },
+          thing4: { value: '已接受，按时来上课' }
+        }
+      })
+    }
     this.load()
   },
   async rejectBooking(e) {
@@ -49,10 +59,25 @@ Page({
       success: async (res) => {
         if (res.confirm && res.content) {
           wx.showLoading({ title: '处理中...' })
-          await cloud.handleBooking(e.currentTarget.dataset.id, 'rejected', res.content)
+          const bookingId = e.currentTarget.dataset.id
+          await cloud.handleBooking(bookingId, 'rejected', res.content)
           wx.hideLoading()
           wx.showToast({ title: '已拒绝' })
-          // TODO: 配置微信订阅消息模板后，通知学员
+          // 通知学员
+          const booking = this.data.list.find(b => b._id === bookingId)
+          if (booking) {
+            cloud.sendNotify({
+              openid: booking.openid,
+              templateId: 'YykAWegLbr7X6xuJpCUXSJbOqy_RZZweGkiELM8W1I0',
+              page: 'pages/student/my-bookings/index',
+              data: {
+                thing1: { value: booking.subject },
+                date2: { value: booking.date },
+                date3: { value: booking.date + ' ' + booking.time },
+                thing4: { value: '已拒绝，原因：' + res.content }
+              }
+            })
+          }
           this.load()
         }
       }

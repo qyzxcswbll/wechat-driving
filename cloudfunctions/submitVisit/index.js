@@ -32,5 +32,26 @@ exports.main = async (event) => {
       createdAt: db.serverDate()
     }
   })
+
+  // 通知教练
+  try {
+    const adminRes = await db.collection('admins').limit(1).get()
+    if (adminRes.data.length > 0) {
+      const admin = adminRes.data[0]
+      await cloud.openapi.subscribeMessage.send({
+        touser: admin.openid,
+        templateId: '0TTCrbD9ZDJTjouXteF5BXoeZZxV2mgG461In1BkPYo',
+        page: 'pages/admin/visits/index',
+        data: {
+          thing1: { value: '参观咨询' },
+          phrase2: { value: '新咨询待回复' },
+          time3: { value: new Date().toLocaleString('zh-CN') }
+        }
+      })
+    }
+  } catch (e) {
+    console.error('通知教练失败', e)
+  }
+
   return { code: 0, data: { visitId: result._id } }
 }

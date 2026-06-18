@@ -28,8 +28,8 @@
     <view class="field">
       <view class="field-label">挡位类型</view>
       <view class="pill-group">
-        <view class="pill {{gear==='自动挡'?'on':''}}" bindtap="setGear" data-val="自动挡">自动挡</view>
-        <view class="pill {{gear==='手动挡'?'on':''}}" bindtap="setGear" data-val="手动挡">手动挡</view>
+        <view class="pill {{gear==='自动挡'?'on':''}}" bindtap="setGear" data-val="自动挡">🔄 自动挡</view>
+        <view class="pill {{gear==='手动挡'?'on':''}}" bindtap="setGear" data-val="手动挡">⚙️ 手动挡</view>
       </view>
     </view>
     <view class="field">

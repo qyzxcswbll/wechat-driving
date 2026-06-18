@@ -73,12 +73,18 @@ Page({
     })
     wx.hideLoading()
     if (res.code === 0) {
-      const notifyMsg = res.notify ? '\n通知: ' + res.notify : ''
-      wx.showModal({
-        title: '提交成功',
-        content: '成功提交' + validSlots.length + '节预约' + notifyMsg,
-        showCancel: false,
-        success: () => setTimeout(() => wx.navigateBack(), 500)
+      // 申请订阅消息权限（学员同意后教练审核结果可通知到学员）
+      wx.requestSubscribeMessage({
+        tmplIds: ['YykAWegLbr7X6xuJpCUXSJbOqy_RZZweGkiELM8W1I0'],
+        complete: () => {
+          const notifyMsg = res.notify ? '\n通知: ' + res.notify : ''
+          wx.showModal({
+            title: '提交成功',
+            content: '成功提交' + validSlots.length + '节预约' + notifyMsg,
+            showCancel: false,
+            success: () => setTimeout(() => wx.navigateBack(), 500)
+          })
+        }
       })
     } else {
       wx.showToast({ title: res.msg || '提交失败', icon: 'none' })

@@ -52,9 +52,9 @@
         <input class="field-input" value="{{form.intro}}" bindinput="onFormInput" data-field="intro" placeholder="如：多年教学经验" />
       </view>
       <view class="field">
-        <view class="field-label">微信二维码</view>
+        <view class="field-label">微信二维码 <text class="q-help" bindtap="showQrGuide">❔</text></view>
         <view style="display:flex;gap:16rpx;align-items:center;">
-          <input class="field-input" style="flex:1;" value="{{form.wechatQR}}" bindinput="onFormInput" data-field="wechatQR" placeholder="上传后粘贴fileID" />
+          <input class="field-input" style="flex:1;" value="{{form.wechatQR}}" bindinput="onFormInput" data-field="wechatQR" placeholder="上传后自动填入" />
           <button class="upload-btn" bindtap="chooseImage">上传</button>
         </view>
       </view>
@@ -62,5 +62,38 @@
       <view wx:if="{{saveMsg}}" style="margin-top:16rpx;font-size:24rpx;color:#0F6E56;">{{saveMsg}}</view>
     </view>
 
+  </view>
+
+  <!-- 二维码教程弹窗 -->
+  <view wx:if="{{showQrModal}}" class="modal-mask" bindtap="closeQrGuide">
+    <view class="modal-box" catchtap="stopProp">
+      <view class="modal-hd">📷 如何获取微信二维码</view>
+      <view class="modal-body">
+        <view class="qr-step">
+          <text class="qr-step-num">1</text>
+          <text class="qr-step-text">打开微信 → 点击右下角「我」</text>
+        </view>
+        <view class="qr-step">
+          <text class="qr-step-num">2</text>
+          <text class="qr-step-text">点击头像进入个人信息页</text>
+        </view>
+        <view class="qr-step">
+          <text class="qr-step-num">3</text>
+          <text class="qr-step-text">点击「二维码名片」</text>
+        </view>
+        <view class="qr-step">
+          <text class="qr-step-num">4</text>
+          <text class="qr-step-text">截图保存到手机（或点「更多」→保存图片）</text>
+        </view>
+        <view class="qr-step">
+          <text class="qr-step-num">5</text>
+          <text class="qr-step-text">回到本页面，点「上传」选择刚才的截图</text>
+        </view>
+        <view style="font-size:24rpx;color:#888;margin-top:24rpx;padding:16rpx;background:#f8f8f8;border-radius:12rpx;">
+          💡 上传成功后系统会自动填入地址，保存即可
+        </view>
+      </view>
+      <view class="modal-close" bindtap="closeQrGuide">知道了</view>
+    </view>
   </view>
 </view>

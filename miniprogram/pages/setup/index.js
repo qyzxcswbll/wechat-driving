@@ -2,7 +2,7 @@ const cloud = require('../../utils/cloud')
 
 Page({
   data: {
-    authed: false,
+    authed: false, showQrModal: false,
     password: '',
     students: [],
     setMsg: '',
@@ -67,6 +67,9 @@ Page({
       }
     }
   },
+  showQrGuide() { this.setData({ showQrModal: true }) },
+  closeQrGuide() { this.setData({ showQrModal: false }) },
+  stopProp() {},
   async chooseImage() {
     wx.chooseImage({
       count: 1,

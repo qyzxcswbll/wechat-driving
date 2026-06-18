@@ -1,4 +1,8 @@
 const cloud = require('../../../utils/cloud')
+function fmtTime(d) {
+  const pad = n => String(n).padStart(2, '0')
+  return d.getFullYear() + '-' + pad(d.getMonth()+1) + '-' + pad(d.getDate()) + ' ' + pad(d.getHours()) + ':' + pad(d.getMinutes()) + ':' + pad(d.getSeconds())
+}
 const NAV_ITEMS = [
   { key: 'home', icon: '📊', label: '首页', url: '../home/index' },
   { key: 'visits', icon: '🙋', label: '咨询', url: '../visits/index' },
@@ -33,20 +37,20 @@ Page({
     await cloud.handleBooking(bookingId, 'accepted')
     wx.hideLoading()
     wx.showToast({ title: '已接受' })
-    // 通知学员
+    // 通知学员（使用同一模板）
     const booking = this.data.list.find(b => b._id === bookingId)
     if (booking) {
-      cloud.sendNotify({
+      const nr = await cloud.sendNotify({
         openid: booking.openid,
-        templateId: 'YykAWegLbr7X6xuJpCUXSJbOqy_RZZweGkiELM8W1I0',
+        templateId: '0TTCrbD9ZDJTjouXteF5BXoeZZxV2mgG461In1BkPYo',
         page: 'pages/student/my-bookings/index',
         data: {
           thing1: { value: booking.subject },
-          date2: { value: booking.date },
-          date3: { value: booking.date + ' ' + booking.time },
-          thing4: { value: '已接受，按时来上课' }
+          phrase2: { value: '已接受' },
+          time3: { value: fmtTime(new Date()) }
         }
       })
+      if (nr.code !== 0) wx.showToast({ title: '通知失败: ' + (nr.msg || ''), icon: 'none' })
     }
     this.load()
   },
@@ -63,20 +67,20 @@ Page({
           await cloud.handleBooking(bookingId, 'rejected', res.content)
           wx.hideLoading()
           wx.showToast({ title: '已拒绝' })
-          // 通知学员
+          // 通知学员（使用同一模板）
           const booking = this.data.list.find(b => b._id === bookingId)
           if (booking) {
-            cloud.sendNotify({
+            const nr = await cloud.sendNotify({
               openid: booking.openid,
-              templateId: 'YykAWegLbr7X6xuJpCUXSJbOqy_RZZweGkiELM8W1I0',
+              templateId: '0TTCrbD9ZDJTjouXteF5BXoeZZxV2mgG461In1BkPYo',
               page: 'pages/student/my-bookings/index',
               data: {
                 thing1: { value: booking.subject },
-                date2: { value: booking.date },
-                date3: { value: booking.date + ' ' + booking.time },
-                thing4: { value: '已拒绝，原因：' + res.content }
+                phrase2: { value: '已拒绝' },
+                time3: { value: fmtTime(new Date()) }
               }
             })
+            if (nr.code !== 0) wx.showToast({ title: '通知失败: ' + (nr.msg || ''), icon: 'none' })
           }
           this.load()
         }

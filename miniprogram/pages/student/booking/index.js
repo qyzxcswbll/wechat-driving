@@ -60,7 +60,7 @@ Page({
 
     // 先申请订阅权限（必须在手势上下文中同步调用）
     wx.requestSubscribeMessage({
-      tmplIds: ['YykAWegLbr7X6xuJpCUXSJbOqy_RZZweGkiELM8W1I0'],
+      tmplIds: ['0TTCrbD9ZDJTjouXteF5BXoeZZxV2mgG461In1BkPYo'],
       complete: async () => {
         wx.showLoading({ title: '提交中...' })
         const gearText = this.data.gear

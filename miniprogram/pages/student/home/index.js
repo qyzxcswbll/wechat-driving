@@ -10,7 +10,10 @@ Page({
   data: { schoolInfo: {}, navItems: NAV_ITEMS },
   onLoad() {
     cloud.getSchoolInfo().then(res => {
-      if (res.code === 0) this.setData({ schoolInfo: res.data })
+      if (res.code === 0) {
+        this.setData({ schoolInfo: res.data })
+        if (res.data.schoolName) wx.setNavigationBarTitle({ title: res.data.schoolName })
+      }
     })
   },
   goTo(e) { wx.navigateTo({ url: e.currentTarget.dataset.url }) },

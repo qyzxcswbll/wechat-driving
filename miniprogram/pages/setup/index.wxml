@@ -46,7 +46,7 @@
       </view>
       <view class="field">
         <view class="field-label">驾校名称</view>
-        <input class="field-input" value="{{form.schoolName}}" bindinput="onFormInput" data-field="schoolName" placeholder="如：平安驾校" />
+        <input class="field-input" value="{{form.schoolName}}" bindinput="onFormInput" data-field="schoolName" placeholder="输入驾校名称" />
       </view>
       <view class="field">
         <view class="field-label">驾校地址</view>

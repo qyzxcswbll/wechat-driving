@@ -1,7 +1,15 @@
 const app = getApp()
+const cloud = require('../../utils/cloud')
 Page({
-  data: { loading: true, authed: false },
+  data: { loading: true, authed: false, schoolName: '' },
   onLoad() {
+    // 加载驾校名称
+    cloud.getSchoolInfo().then(r => {
+      if (r.code === 0 && r.data.schoolName) {
+        this.setData({ schoolName: r.data.schoolName })
+        wx.setNavigationBarTitle({ title: r.data.schoolName })
+      }
+    })
     this.autoLogin()
   },
   async autoLogin() {

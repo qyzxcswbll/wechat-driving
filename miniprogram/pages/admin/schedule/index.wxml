@@ -1,43 +1,47 @@
 <view class="page">
-  <!-- 月份标签 -->
-  <view class="month-label">{{monthLabel}}课程表</view>
+  <!-- 头部 -->
+  <view class="header">📅 课程表</view>
 
-  <!-- 可滑动日期条 -->
-  <scroll-view class="date-strip" scroll-x enhanced show-scrollbar="{{false}}" bindscroll="onDateScroll" scroll-left="{{scrollLeft}}">
-    <view wx:for="{{days}}" wx:key="date"
-      class="date-card {{item.active?'active':''}} {{item.isToday?'today':''}}"
-      bindtap="selectDay" data-date="{{item.date}}">
-      <text class="dc-dow">{{item.dow}}</text>
-      <text class="dc-day">{{item.day}}</text>
-      <text class="dc-count" wx:if="{{item.count>0}}">{{item.count}}节</text>
-      <text class="dc-count empty" wx:if="{{item.count===0}}">休</text>
+  <!-- 日期条 + 月份跳转 -->
+  <view class="date-section">
+    <view class="date-top">
+      <text class="week-label">{{weekLabel}}</text>
+      <picker mode="date" value="{{pickerDate}}" bindchange="onMonthPick">
+        <view class="month-picker">📅 选择月份 ▾</view>
+      </picker>
     </view>
-  </scroll-view>
-
-  <!-- 选中日期 -->
-  <view class="selected-label">{{selectedDate}} 课程</view>
-
-  <!-- 按时间分组 -->
-  <view wx:if="{{groupedSchedule.length===0}}" class="empty-card">
-    <text class="empty-icon">📅</text>
-    <text class="empty-text">当天暂无课程</text>
+    <scroll-view class="date-strip" scroll-x enhanced show-scrollbar="{{false}}" scroll-left="{{scrollLeft}}">
+      <view wx:for="{{days}}" wx:key="date"
+        class="date-card {{item.active?'active':''}} {{item.isToday?'today':''}}"
+        bindtap="selectDay" data-date="{{item.date}}">
+        <text class="dc-dow">{{item.dow}}</text>
+        <text class="dc-day">{{item.day}}</text>
+        <text class="dc-count" wx:if="{{item.count>0}}">{{item.count}}节</text>
+        <text class="dc-count empty" wx:if="{{item.count===0}}">休</text>
+      </view>
+    </scroll-view>
   </view>
 
-  <view wx:for="{{groupedSchedule}}" wx:key="time" class="time-group">
-    <view class="time-group-hd">⏰ {{item.time}}</view>
-    <view wx:for="{{item.students}}" wx:key="_id" class="student-card" bindtap="showDetail" data-item="{{item}}">
-      <view class="sc-left">
-        <text class="sc-name">{{item.studentName || item.nickName || '学员'}}</text>
-        <text class="sc-subject">{{item.subject}}</text>
-      </view>
-      <view class="sc-right">
-        <text class="sc-phone" wx:if="{{item.phone}}" bindtap="callStudent" data-phone="{{item.phone}}" catchtap>📞</text>
-        <text class="sc-arrow">›</text>
+  <!-- 课程列表 -->
+  <view class="course-section">
+    <view class="selected-date">📅 {{selectedDate}} · {{dayTotal}}节课</view>
+
+    <view wx:if="{{groupedSchedule.length===0}}" class="empty-state">
+      <text class="empty-icon">📅</text>
+      <text class="empty-text">当天暂无课程</text>
+    </view>
+
+    <view wx:for="{{groupedSchedule}}" wx:key="time" class="time-group">
+      <view class="time-header">⏰ {{item.time}} <text class="time-count">{{item.students.length}}人</text></view>
+      <view class="student-tag-wrap">
+        <view wx:for="{{item.students}}" wx:key="_id" class="student-tag" bindtap="showDetail" data-item="{{item}}">
+          <text class="tag-name">{{item.studentName || item.nickName || '学员'}}</text>
+        </view>
       </view>
     </view>
   </view>
 
-  <!-- 学员详情弹窗 -->
+  <!-- 详情弹窗 -->
   <view wx:if="{{showModal}}" class="modal-mask" bindtap="closeModal">
     <view class="modal-box" catchtap="stopProp">
       <view class="modal-hd">📋 学员详情</view>

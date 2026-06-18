@@ -10,7 +10,7 @@ const MONTHS = ['一月','二月','三月','四月','五月','六月','七月','
 
 Page({
   data: {
-    scheduleMap: {}, days: [], monthLabel: '', selectedDate: '',
+    scheduleMap: {}, days: [], weekLabel: '', selectedDate: '', pickerDate: '',
     groupedSchedule: [], showModal: false, modalData: {}, navItems: NAV_ITEMS,
     scrollLeft: 0
   },
@@ -19,19 +19,18 @@ Page({
     const res = await cloud.getSchedule()
     if (res.code === 0) {
       this.setData({ scheduleMap: res.data })
-      this.renderDays(0)
+      this.renderWeek(0)
     }
   },
-  renderDays(offset) {
-    // offset: 0=今天开始, >0往后推N天（用于滚动加载）
+  renderWeek(offsetDays) {
+    // offsetDays: 从今天偏移的天数（用于点"选择月份"后跳转）
     const today = new Date()
     const todayStr = this.dateStr(today)
     const startDay = new Date(today)
-    startDay.setDate(today.getDate() + offset)
+    startDay.setDate(today.getDate() + offsetDays)
 
     const days = []
-    // 生成30天
-    for (let i = 0; i < 30; i++) {
+    for (let i = 0; i < 7; i++) {
       const d = new Date(startDay)
       d.setDate(startDay.getDate() + i)
       const dateStr = this.dateStr(d)
@@ -40,57 +39,55 @@ Page({
         date: dateStr,
         dow: DOWS[d.getDay()],
         day: String(d.getDate()).padStart(2, '0'),
-        month: d.getMonth() + 1,
         isToday: dateStr === todayStr,
         active: dateStr === (this.data.selectedDate || todayStr),
         count: daySchedule.length
       })
     }
 
-    const firstDay = days[0]
-    const lastDay = days[days.length - 1]
-    const monthLabel = firstDay.month === lastDay.month
-      ? firstDay.month + '月'
-      : firstDay.month + '-' + lastDay.month + '月'
-
     const activeDate = this.data.selectedDate || todayStr
-    const rawSchedule = this.data.scheduleMap[activeDate] || []
-
-    // 按时间分组
-    const timeGroups = {}
-    rawSchedule.forEach(item => {
-      const key = item.time || '00:00'
-      if (!timeGroups[key]) timeGroups[key] = []
-      timeGroups[key].push(item)
-    })
-    const groupedSchedule = Object.keys(timeGroups).sort().map(time => ({
-      time,
-      students: timeGroups[time]
-    }))
-
+    const weekLabel = days[0].date + ' - ' + days[6].date
     this.setData({
-      days, monthLabel,
-      selectedDate: activeDate,
-      groupedSchedule
+      days, weekLabel, selectedDate: activeDate,
+      groupedSchedule: this.buildGrouped(this.data.scheduleMap[activeDate] || []),
+      dayTotal: (this.data.scheduleMap[activeDate] || []).length
     })
   },
-  onDateScroll(e) {
-    // 滚动到边缘时加载更多
-    const scrollLeft = e.detail.scrollLeft
-    const scrollWidth = e.detail.scrollWidth
-    const clientWidth = e.detail.clientWidth
-    // 如果快要滚到底，往前加载更多（这里暂不实现动态加载，30天够用）
+  buildGrouped(schedule) {
+    const groups = {}
+    schedule.forEach(item => {
+      const key = item.time || '00:00'
+      if (!groups[key]) groups[key] = []
+      groups[key].push(item)
+    })
+    return Object.keys(groups).sort().map(time => ({
+      time,
+      students: groups[time]
+    }))
   },
   selectDay(e) {
     const date = e.currentTarget.dataset.date
-    this.setData({ selectedDate: date })
-    this.renderDays(0)
-
-    // 自动滚动到选中日期可见
-    const idx = this.data.days.findIndex(d => d.date === date)
-    if (idx > -1) {
-      this.setData({ scrollLeft: Math.max(0, idx * 120 - 80) })
-    }
+    this.setData({
+      selectedDate: date,
+      groupedSchedule: this.buildGrouped(this.data.scheduleMap[date] || []),
+      dayTotal: (this.data.scheduleMap[date] || []).length
+    })
+    // 高亮选中日期
+    const days = this.data.days.map(d => ({ ...d, active: d.date === date }))
+    this.setData({ days })
+  },
+  // 选择月份：用微信自带 picker
+  onMonthPick(e) {
+    const picked = new Date(e.detail.value)
+    const today = new Date()
+    const diffDays = Math.floor((picked - today) / (1000 * 60 * 60 * 24))
+    this.setData({ selectedDate: this.dateStr(picked), pickerDate: e.detail.value })
+    this.renderWeek(diffDays)
+    // 滚动到选中日期
+    setTimeout(() => {
+      const idx = this.data.days.findIndex(d => d.active)
+      if (idx > -1) this.setData({ scrollLeft: Math.max(0, idx * 116 - 60) })
+    }, 100)
   },
   showDetail(e) {
     this.setData({ showModal: true, modalData: e.currentTarget.dataset.item })

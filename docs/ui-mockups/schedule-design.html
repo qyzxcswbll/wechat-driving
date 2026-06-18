@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>课程表 · 设计稿</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f5f5f7;display:flex;justify-content:center;padding:24px 12px}
+.phone-mock{width:390px;background:#fff;border-radius:32px;box-shadow:0 8px 40px rgba(0,0,0,.12);overflow:hidden;padding:0 0 20px}
+
+/* 状态栏 */
+.status-bar{display:flex;justify-content:space-between;padding:14px 24px 8px;font-size:13px;color:#222;font-weight:600}
+
+/* 头部 */
+.header{display:flex;justify-content:space-between;align-items:center;padding:8px 24px 16px}
+.header h1{font-size:24px;font-weight:700;color:#1a1a1a}
+.header-actions{display:flex;gap:12px}
+.header-btn{width:36px;height:36px;background:#f0f0f0;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px}
+
+/* 日期条容器 */
+.date-section{padding:0 16px 20px}
+.date-strip{display:flex;gap:6px;overflow-x:auto;padding:4px 0 8px;-webkit-overflow-scrolling:touch}
+.date-strip::-webkit-scrollbar{display:none}
+.date-card{flex-shrink:0;width:76px;padding:12px 0;border-radius:14px;text-align:center;border:2px solid #e8e8e8;background:#fff;cursor:pointer;position:relative;transition:all .15s}
+.date-card.active{background:#0F6E56;border-color:#0F6E56}
+.date-card.today{border-color:#9FE1CB;background:#E1F5EE}
+.date-card.active.today{background:#0F6E56}
+.dc-dow{font-size:12px;color:#999;margin-bottom:4px}
+.date-card.active .dc-dow{color:rgba(255,255,255,.7)}
+.date-card.today:not(.active) .dc-dow{color:#0F6E56}
+.dc-day{font-size:22px;font-weight:700;color:#222;margin-bottom:4px}
+.date-card.active .dc-day{color:#fff}
+.date-card.today:not(.active) .dc-day{color:#0F6E56}
+.dc-count{font-size:11px;color:#fff;background:#0F6E56;padding:1px 10px;border-radius:10px;display:inline-block}
+.date-card.active .dc-count{background:rgba(255,255,255,.25)}
+.date-card.today:not(.active) .dc-count{background:#0F6E56}
+.dc-count.off{background:transparent;color:#ccc}
+
+/* 日历跳转 */
+.cal-jump{display:flex;justify-content:space-between;align-items:center;padding:8px 8px 0}
+.cal-jump-btn{font-size:13px;color:#0F6E56;background:#E1F5EE;padding:8px 16px;border-radius:10px;display:inline-flex;align-items:center;gap:4px;cursor:pointer}
+
+/* 课程区域 */
+.course-section{padding:0 20px}
+
+/* 选中日期标题 */
+.selected-date{font-size:14px;color:#666;margin-bottom:16px;font-weight:500}
+
+/* 空状态 */
+.empty-state{text-align:center;padding:60px 0}
+.empty-state .icon{font-size:48px;display:block;margin-bottom:12px}
+.empty-state .text{font-size:14px;color:#aaa}
+
+/* 时间段分组 */
+.time-group{margin-bottom:20px}
+.time-header{font-size:15px;font-weight:600;color:#0F6E56;margin-bottom:10px;display:flex;align-items:center;gap:6px}
+
+/* 学员标签 */
+.student-tag-wrap{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px}
+.student-tag{display:inline-flex;align-items:center;gap:6px;background:#f8f8f8;border:2px solid #e8e8e8;border-radius:20px;padding:10px 14px;cursor:pointer;transition:all .1s}
+.student-tag:active{background:#EEEDFE;border-color:#534AB7}
+.student-tag .name{font-size:14px;font-weight:500;color:#333}
+.student-tag .name{font-size:14px;font-weight:500;color:#333}
+
+/* 分割线 */
+.divider{height:1px;background:#f0f0f0;margin:16px 0}
+
+/* 底部导航 */
+.bottom-nav{display:flex;border-top:1px solid #e8e8e8;background:#fff;margin-top:16px;padding:6px 0 env(safe-area-inset-bottom)}
+.nav-item{flex:1;text-align:center;padding:8px 0}
+.nav-item .ni-icon{font-size:22px;display:block;margin-bottom:2px}
+.nav-item .ni-label{font-size:10px;color:#999}
+.nav-item.active .ni-label{color:#0F6E56}
+
+/* 弹窗模拟 */
+.modal-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.4);display:flex;align-items:center;justify-content:center;z-index:100}
+.modal-box{background:#fff;border-radius:20px;width:340px;padding:28px 24px;box-shadow:0 8px 40px rgba(0,0,0,.2)}
+.modal-hd{font-size:18px;font-weight:600;color:#222;text-align:center;margin-bottom:16px}
+.modal-row{display:flex;padding:12px 0;border-bottom:1px solid #f0f0f0;font-size:14px}
+.modal-row:last-child{border-bottom:none}
+.modal-row .ml{color:#888;width:80px;flex-shrink:0}
+.modal-row .mv{color:#333}
+.modal-actions{display:flex;gap:10px;margin-top:20px}
+.modal-btn{flex:1;padding:12px;border-radius:12px;text-align:center;font-size:15px;font-weight:500;cursor:pointer}
+.modal-btn.call{background:#0F6E56;color:#fff}
+.modal-btn.close{background:#f0f0f0;color:#555}
+</style>
+</head>
+<body>
+
+<div class="phone-mock">
+
+  <!-- 状态栏 -->
+  <div class="status-bar">
+    <span>9:41</span>
+    <span>🔋 100%</span>
+  </div>
+
+  <!-- 头部 -->
+  <div class="header">
+    <h1>📅 课程表</h1>
+    <div class="header-actions">
+      <div class="header-btn">🔔</div>
+    </div>
+  </div>
+
+  <!-- 日期条 -->
+  <div class="date-section">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+      <span style="font-size:14px;font-weight:600;color:#333;">6月18日 - 6月24日</span>
+      <span class="cal-jump-btn">📅 选择月份 ▾</span>
+    </div>
+    <div class="date-strip">
+      <div class="date-card today active">
+        <div class="dc-dow">周四</div>
+        <div class="dc-day">18</div>
+        <span class="dc-count">3节</span>
+      </div>
+      <div class="date-card">
+        <div class="dc-dow">周五</div>
+        <div class="dc-day">19</div>
+        <span class="dc-count off">休</span>
+      </div>
+      <div class="date-card">
+        <div class="dc-dow">周六</div>
+        <div class="dc-day">20</div>
+        <span class="dc-count">2节</span>
+      </div>
+      <div class="date-card">
+        <div class="dc-dow">周日</div>
+        <div class="dc-day">21</div>
+        <span class="dc-count off">休</span>
+      </div>
+      <div class="date-card">
+        <div class="dc-dow">周一</div>
+        <div class="dc-day">22</div>
+        <span class="dc-count">4节</span>
+      </div>
+      <div class="date-card">
+        <div class="dc-dow">周二</div>
+        <div class="dc-day">23</div>
+        <span class="dc-count off">休</span>
+      </div>
+      <div class="date-card">
+        <div class="dc-dow">周三</div>
+        <div class="dc-day">24</div>
+        <span class="dc-count off">休</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 课程内容 -->
+  <div class="course-section">
+
+    <div class="selected-date">📅 6月18日 周四 · 3节课</div>
+
+    <!-- 08:00 时段 -->
+    <div class="time-group">
+      <div class="time-header">⏰ 08:00 - 10:00 <span style="font-size:13px;color:#888;font-weight:400;">2人</span></div>
+      <div class="student-tag-wrap">
+        <div class="student-tag"><span class="name">张三</span></div>
+        <div class="student-tag"><span class="name">李四</span></div>
+      </div>
+    </div>
+
+    <!-- 10:00 时段 -->
+    <div class="time-group">
+      <div class="time-header">⏰ 10:00 - 12:00 <span style="font-size:13px;color:#888;font-weight:400;">2人</span></div>
+      <div class="student-tag-wrap">
+        <div class="student-tag"><span class="name">王五</span></div>
+        <div class="student-tag"><span class="name">赵六</span></div>
+      </div>
+    </div>
+
+    <!-- 14:00 时段 -->
+    <div class="time-group">
+      <div class="time-header">⏰ 14:00 - 16:00 <span style="font-size:13px;color:#888;font-weight:400;">1人</span></div>
+      <div class="student-tag-wrap">
+        <div class="student-tag"><span class="name">小红</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 底部导航 -->
+  <div class="bottom-nav">
+    <div class="nav-item"><span class="ni-icon">📊</span><span class="ni-label">首页</span></div>
+    <div class="nav-item"><span class="ni-icon">🙋</span><span class="ni-label">咨询</span></div>
+    <div class="nav-item"><span class="ni-icon">📋</span><span class="ni-label">预约</span></div>
+    <div class="nav-item active"><span class="ni-icon">📅</span><span class="ni-label">课程</span></div>
+  </div>
+</div>
+
+<br>
+
+<!-- 详情弹窗示例 -->
+<div class="modal-overlay" style="position:relative;margin-top:20px;background:none;display:block;">
+  <div class="modal-box" style="margin:0 auto;">
+    <div class="modal-hd">📋 学员详情</div>
+    <div class="modal-row"><span class="ml">姓名</span><span class="mv">张三</span></div>
+    <div class="modal-row"><span class="ml">电话</span><span class="mv">138****1234</span></div>
+    <div class="modal-row"><span class="ml">科目</span><span class="mv">科目二</span></div>
+    <div class="modal-row"><span class="ml">时间</span><span class="mv">6月18日 08:00</span></div>
+    <div class="modal-row"><span class="ml">备注</span><span class="mv">手动挡</span></div>
+    <div class="modal-actions">
+      <div class="modal-btn call">📞 拨打电话</div>
+      <div class="modal-btn close">关闭</div>
+    </div>
+  </div>
+</div>
+
+<div style="max-width:390px;margin:20px auto 0;font-size:13px;color:#888;text-align:center;line-height:1.8;">
+  ↑ 上为课程表页面设计 · 下为点击学员标签后的详情弹窗<br>
+  日期条可左右滑动，点击「选择月份」可跳转到任意月份
+</div>
+
+</body>
+</html>

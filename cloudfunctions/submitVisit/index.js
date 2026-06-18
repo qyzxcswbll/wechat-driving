@@ -34,11 +34,13 @@ exports.main = async (event) => {
   })
 
   // 通知教练
+  let notifyResult = ''
   try {
     const adminRes = await db.collection('admins').limit(1).get()
     if (adminRes.data.length > 0) {
       const admin = adminRes.data[0]
-      await cloud.openapi.subscribeMessage.send({
+      notifyResult = '找到管理员: ' + (admin.name || admin.openid)
+      const sendRes = await cloud.openapi.subscribeMessage.send({
         touser: admin.openid,
         templateId: '0TTCrbD9ZDJTjouXteF5BXoeZZxV2mgG461In1BkPYo',
         page: 'pages/admin/visits/index',
@@ -48,10 +50,14 @@ exports.main = async (event) => {
           time3: { value: new Date().toLocaleString('zh-CN') }
         }
       })
+      notifyResult += ' | 发送结果: ' + JSON.stringify(sendRes)
+    } else {
+      notifyResult = '未找到管理员记录'
     }
   } catch (e) {
+    notifyResult = '发送失败: ' + e.message
     console.error('通知教练失败', e)
   }
 
-  return { code: 0, data: { visitId: result._id } }
+  return { code: 0, data: { visitId: result._id }, notify: notifyResult }
 }

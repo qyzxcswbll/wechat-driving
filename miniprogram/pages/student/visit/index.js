@@ -38,6 +38,7 @@ Page({
         gender: this.data.gender,
         phone: this.data.phone
       }
+      wx.setStorageSync('lastNotify', res.notify || '')
       wx.requestSubscribeMessage({
         tmplIds: [],
         complete: () => {

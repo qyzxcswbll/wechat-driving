@@ -8,4 +8,8 @@
 }
 .splash-icon { font-size: 48px; margin-bottom: 12px; }
 .splash-title { font-size: 20px; font-weight: 500; color: #3C3489; margin-bottom: 8px; }
-.splash-sub { font-size: 14px; color: #888; }
+.splash-sub { font-size: 14px; color: #888; margin-bottom: 48px; }
+.notify-box { text-align: center; width: 80%; }
+.notify-text { font-size: 14px; color: #666; margin-bottom: 20px; line-height: 1.6; }
+.notify-btn { background: #534AB7; color: #fff; padding: 14px 20px; border-radius: 12px; font-size: 15px; font-weight: 500; margin-bottom: 12px; }
+.skip-btn { font-size: 13px; color: #999; padding: 10px; }

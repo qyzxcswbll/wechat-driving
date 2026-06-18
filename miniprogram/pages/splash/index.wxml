@@ -1,5 +1,10 @@
 <view class="splash">
   <view class="splash-icon">🚗</view>
   <view class="splash-title">平安驾校</view>
-  <text class="splash-sub">加载中...</text>
+  <view class="splash-sub">学车预约小程序</view>
+  <view class="notify-box" wx:if="{{showNotify}}">
+    <view class="notify-text">开启通知，及时获取预约审核结果</view>
+    <view class="notify-btn" bindtap="enableNotify">✅ 开启通知提醒</view>
+    <view class="skip-btn" bindtap="goHome">跳过</view>
+  </view>
 </view>

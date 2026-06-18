@@ -36,10 +36,6 @@ App({
         })
       }
 
-      const homePage = res.data.isAdmin
-        ? '/pages/admin/home/index'
-        : '/pages/student/home/index'
-      wx.redirectTo({ url: homePage })
     } else {
       wx.showToast({ title: '登录失败', icon: 'none' })
     }

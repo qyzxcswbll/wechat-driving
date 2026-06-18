@@ -1,8 +1,7 @@
 <view class="splash">
   <view class="splash-icon">🚗</view>
   <view class="splash-title">平安驾校</view>
-  <view class="splash-sub">学车预约小程序</view>
-  <view wx:if="{{!loading}}" class="login-box">
+  <view wx:if="{{!loading && !authed}}" class="login-box">
     <button class="login-btn" bindtap="doLogin">微信一键登录</button>
     <view class="login-desc">授权后自动识别身份</view>
   </view>

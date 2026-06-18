@@ -10,11 +10,6 @@
     <view class="info-row"><text class="info-label">📞 电话</text><text class="info-val">{{schoolInfo.phone}}</text></view>
   </view>
 
-  <view class="intro-card" wx:if="{{schoolInfo.intro}}">
-    <view class="section-title">驾校简介</view>
-    <text class="intro-text">{{schoolInfo.intro}}</text>
-  </view>
-
   <view class="menu-grid">
     <view class="menu-item" bindtap="goTo" data-url="../school/index">
       <text class="menu-icon">📋</text>

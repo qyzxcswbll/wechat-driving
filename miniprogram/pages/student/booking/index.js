@@ -67,7 +67,7 @@ Page({
         const bookings = validSlots.map(s => ({
           date: s.date, time: s.time,
           subject: this.data.subject,
-          remark: (s.remark || this.data.remark) ? (s.remark || this.data.remark) + ' · ' + gearText : gearText
+          remark: (s.remark || this.data.remark || '') + ' · ' + gearText
         }))
         const res = await cloud.submitBooking({
           nickName: this.data.nickName,

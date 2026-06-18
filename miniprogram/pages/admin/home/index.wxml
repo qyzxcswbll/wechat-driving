@@ -29,7 +29,7 @@
     </view>
   </view>
   <view class="notify-bar" bindtap="subscribeMsg">
-    <text style="font-size:24rpx;">🔔 点此开启新预约通知</text>
+    <text style="font-size:22rpx;">🔔 如未收到通知，点此重新授权</text>
   </view>
 </view>
 <nav-bar activeTab="home" items="{{navItems}}" />

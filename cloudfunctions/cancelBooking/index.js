@@ -19,5 +19,31 @@ exports.main = async (event) => {
       updatedAt: db.serverDate()
     }
   })
+
+  // 通知教练
+  try {
+    const adminRes = await db.collection('admins').limit(1).get()
+    if (adminRes.data.length > 0) {
+      const admin = adminRes.data[0]
+      await cloud.openapi.subscribeMessage.send({
+        touser: admin.openid,
+        templateId: '0TTCrbD9ZDJTjouXteF5BXoeZZxV2mgG461In1BkPYo',
+        page: 'pages/admin/bookings/index',
+        data: {
+          thing1: { value: '学员取消预约' },
+          phrase2: { value: '已取消' },
+          time3: { value: fmtTime(new Date()) }
+        }
+      })
+    }
+  } catch (e) {
+    console.error('通知教练失败', e)
+  }
+
   return { code: 0, msg: '已取消' }
+}
+
+function fmtTime(d) {
+  const pad = n => String(n).padStart(2, '0')
+  return d.getFullYear() + '-' + pad(d.getMonth()+1) + '-' + pad(d.getDate()) + ' ' + pad(d.getHours()) + ':' + pad(d.getMinutes()) + ':' + pad(d.getSeconds())
 }

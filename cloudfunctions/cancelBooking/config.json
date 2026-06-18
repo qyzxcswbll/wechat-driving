@@ -1,0 +1,8 @@
+{
+  "triggers": [],
+  "permissions": {
+    "openapi": [
+      "subscribeMessage.send"
+    ]
+  }
+}

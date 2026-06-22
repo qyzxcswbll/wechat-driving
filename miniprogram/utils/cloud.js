@@ -6,7 +6,7 @@ const call = (name, data) => {
 
 module.exports = {
   login: (data) => call('login', data),
-  getSchoolInfo: () => call('getSchoolInfo'),
+getSchoolInfo: () => call('getSchoolInfo'),
   submitVisit: (data) => call('submitVisit', data),
   getVisits: () => call('getVisits'),
   markContacted: (id) => call('markContacted', { visitId: id }),
@@ -22,5 +22,6 @@ module.exports = {
   setupGetAllStudents: (data) => call('setupGetAllStudents', data),
   setupGetAdmins: () => call('setupGetAdmins'),
   setupSetAdmin: (openid) => call('setupSetAdmin', { openid }),
+  setupRemoveAdmin: (openid) => call('setupRemoveAdmin', { openid }),
   setupUpdateSchool: (data) => call('setupUpdateSchool', data)
 }

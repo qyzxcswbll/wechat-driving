@@ -1,9 +1,9 @@
 <view class="page">
   <view class="card">
     <view class="field">
-      <view class="field-label">姓名 <text class="required">*</text></view>
+      <view class="field-label">称呼（选填）</view>
       <view class="name-row">
-        <input class="name-input" placeholder="您的姓名" value="{{studentName}}" bindinput="onNameInput" />
+        <input class="name-input" placeholder="您的昵称（默认使用微信昵称）" value="{{nickName}}" bindinput="onNameInput" />
         <view class="gender-tag {{gender==='先生'?'on':''}}" bindtap="setGender" data-val="先生">先生</view>
         <view class="gender-tag {{gender==='女士'?'on':''}}" bindtap="setGender" data-val="女士">女士</view>
       </view>
@@ -52,5 +52,11 @@
   </view>
 
   <view class="add-slot" bindtap="addSlot">+ 再添加一个日期</view>
-  <button class="btn-primary" bindtap="submit">一次性提交所有预约（{{slots.length}}节）</button>
+  <view class="privacy-row">
+    <label class="privacy-checkbox" bindtap="togglePrivacy">
+      <view class="check-box {{agreed?'checked':''}}">{{agreed?'✓':''}}</view>
+      <text class="privacy-text">我已阅读并同意 <text class="privacy-link" bindtap="openPrivacy" catchtap>《隐私政策》</text></text>
+    </label>
+  </view>
+  <button class="btn-primary {{!agreed?'btn-disabled':''}}" disabled="{{!agreed}}" bindtap="submit">一次性提交所有预约（{{slots.length}}节）</button>
 </view>

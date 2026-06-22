@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="144" height="144" viewBox="0 0 144 144">
+  <!-- 背景圆 -->
+  <rect width="144" height="144" rx="28" fill="#534AB7"/>
+
+  <!-- 汽车车身 -->
+  <g transform="translate(72,72)">
+    <!-- 车底 -->
+    <rect x="-40" y="-8" width="80" height="28" rx="8" fill="#fff"/>
+
+    <!-- 车顶 -->
+    <rect x="-22" y="-32" width="44" height="26" rx="10" fill="#fff"/>
+
+    <!-- 后窗 -->
+    <rect x="-16" y="-28" width="14" height="18" rx="4" fill="#534AB7" opacity=".3"/>
+    <!-- 前窗 -->
+    <rect x="2" y="-28" width="14" height="18" rx="4" fill="#534AB7" opacity=".3"/>
+
+    <!-- 车轮 -->
+    <circle cx="-24" cy="24" r="10" fill="#333"/>
+    <circle cx="-24" cy="24" r="4" fill="#fff"/>
+    <circle cx="24" cy="24" r="10" fill="#333"/>
+    <circle cx="24" cy="24" r="4" fill="#fff"/>
+
+    <!-- 车灯 -->
+    <rect x="38" y="0" width="6" height="8" rx="2" fill="#FFE082"/>
+  </g>
+
+</svg>

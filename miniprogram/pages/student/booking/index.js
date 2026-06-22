@@ -20,17 +20,16 @@ Page({
     gear: '自动挡',
     remark: '',
     slots: [emptySlot()],
-    studentName: '',
-    gender: '先生',
     nickName: '',
-    phone: ''
+    gender: '先生',
+    phone: '',
+    agreed: false
   },
   onLoad() {
     const ui = app.globalData.userInfo
     if (ui) {
       this.setData({
-        nickName: ui.nickName || '',
-        studentName: ui.studentName || '',
+        nickName: ui.nickName || ui.studentName || '',
         gender: ui.gender || '先生',
         phone: ui.phone || ''
       })
@@ -39,9 +38,11 @@ Page({
   setSubject(e) { this.setData({ subject: e.currentTarget.dataset.val }) },
   setGear(e) { this.setData({ gear: e.currentTarget.dataset.val }) },
   setGender(e) { this.setData({ gender: e.currentTarget.dataset.val }) },
-  onNameInput(e) { this.setData({ studentName: e.detail.value }) },
+  onNameInput(e) { this.setData({ nickName: e.detail.value }) },
   onPhoneInput(e) { this.setData({ phone: e.detail.value }) },
   onRemarkInput(e) { this.setData({ remark: e.detail.value }) },
+  togglePrivacy() { this.setData({ agreed: !this.data.agreed }) },
+  openPrivacy() { wx.navigateTo({ url: '/pages/privacy/index' }) },
   onTimeChange(e) {
     const idx = e.currentTarget.dataset.index
     const time = e.detail.value
@@ -72,12 +73,14 @@ Page({
     this.setData({ slots })
   },
   async submit() {
-    if (!this.data.studentName) return wx.showToast({ title: '请输入姓名', icon: 'none' })
     if (!this.data.phone) return wx.showToast({ title: '请输入手机号', icon: 'none' })
+    if (!this.data.agreed) return wx.showToast({ title: '请先阅读并同意隐私政策', icon: 'none' })
     const validSlots = this.data.slots.filter(s => s.date && s.time)
     if (validSlots.length === 0) {
       return wx.showToast({ title: '请至少填写一个日期和时间', icon: 'none' })
     }
+
+    const nickName = this.data.nickName || app.globalData.userInfo?.nickName || '学员'
 
     // 先申请订阅权限（必须在手势上下文中同步调用）
     wx.requestSubscribeMessage({
@@ -91,8 +94,8 @@ Page({
           remark: (s.remark || this.data.remark || '') + ' · ' + gearText
         }))
         const res = await cloud.submitBooking({
-          nickName: this.data.nickName,
-          studentName: this.data.studentName,
+          nickName,
+          studentName: nickName,
           gender: this.data.gender,
           phone: this.data.phone,
           bookings

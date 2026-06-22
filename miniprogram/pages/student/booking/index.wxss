@@ -23,3 +23,11 @@
 .add-slot { border: 3rpx dashed #ccc; border-radius: 20rpx; padding: 28rpx; text-align: center; font-size: 28rpx; color: #888; margin-bottom: 40rpx; width: 100%; box-sizing: border-box; }
 .btn-primary { background: #534AB7; color: #fff; padding: 32rpx; border-radius: 20rpx; text-align: center; font-size: 30rpx; font-weight: 500; width: 100%; border: none; display: block; box-sizing: border-box; min-height: 96rpx; line-height: 1.2; }
 .btn-primary::after { border: none; }
+.btn-primary.btn-disabled { background: #ccc; }
+.privacy-row { margin-top: 24rpx; padding: 24rpx 0; }
+.privacy-checkbox { display: flex; align-items: center; gap: 12rpx; }
+.check-box { width: 32rpx; height: 32rpx; border-radius: 6rpx; border: 2rpx solid #ccc; display: flex; align-items: center; justify-content: center; font-size: 20rpx; color: #fff; flex-shrink: 0; }
+.check-box.checked { background: #534AB7; border-color: #534AB7; }
+.privacy-text { font-size: 24rpx; color: #666; }
+.privacy-link { color: #534AB7; text-decoration: underline; }
+.hint { font-size: 24rpx; color: #aaa; margin-top: 12rpx; }

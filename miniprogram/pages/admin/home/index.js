@@ -26,5 +26,6 @@ Page({
       this.setData({ visitCount: vRes.data.filter(v => v.status === 'pending').length })
     }
   },
-  goTo(e) { wx.redirectTo({ url: e.currentTarget.dataset.url }) }
+  goTo(e) { wx.redirectTo({ url: e.currentTarget.dataset.url }) },
+  goSetup() { wx.navigateTo({ url: '/pages/setup/index' }) }
 })

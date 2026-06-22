@@ -31,5 +31,13 @@
   <view class="notify-bar" bindtap="subscribeMsg">
     <text style="font-size:22rpx;">🔔 如未收到通知，点此重新授权</text>
   </view>
+  <view class="setup-card" bindtap="goSetup">
+    <text class="setup-icon">⚙️</text>
+    <view class="setup-text">
+      <view class="setup-title">管理设置</view>
+      <view class="setup-desc">学员管理、驾校信息修改</view>
+    </view>
+    <text class="setup-arrow">›</text>
+  </view>
 </view>
 <nav-bar activeTab="home" items="{{navItems}}" />

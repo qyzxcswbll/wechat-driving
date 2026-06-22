@@ -8,6 +8,7 @@
     "pages/student/my-bookings/index",
     "pages/student/booking-detail/index",
     "pages/student/contact/index",
+    "pages/privacy/index",
     "pages/admin/home/index",
     "pages/admin/visits/index",
     "pages/admin/bookings/index",

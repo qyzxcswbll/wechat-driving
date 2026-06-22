@@ -27,7 +27,7 @@
           <view style="font-size:24rpx;color:#888;">📱 {{item.phone || '未填'}}</view>
         </view>
         <view wx:if="{{!item.isAdmin}}" class="set-btn" bindtap="setAsAdmin" data-openid="{{item.openid}}">设为教练</view>
-        <view wx:else style="font-size:24rpx;color:#aaa;">✓ 已设置</view>
+        <view wx:else class="remove-btn" bindtap="removeAdmin" data-openid="{{item.openid}}" data-name="{{item.studentName || item.nickName}}">取消教练</view>
       </view>
       <view wx:if="{{studentOffset < studentTotal}}" class="load-more" bindtap="loadMoreStudents">加载更多学员 ({{students.length}}/{{studentTotal}})</view>
       <view wx:if="{{setMsg}}" style="margin-top:16rpx;font-size:24rpx;color:#0F6E56;">{{setMsg}}</view>

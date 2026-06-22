@@ -101,6 +101,28 @@ Page({
       }
     }
   },
+  async removeAdmin(e) {
+    const openid = e.currentTarget.dataset.openid
+    const name = e.currentTarget.dataset.name
+    wx.showModal({
+      title: '取消教练权限',
+      content: `确定将「${name}」取消教练身份吗？`,
+      success: async (res) => {
+        if (res.confirm) {
+          wx.showLoading({ title: '处理中...' })
+          const result = await cloud.setupRemoveAdmin(openid)
+          wx.hideLoading()
+          this.setData({ setMsg: result.msg })
+          if (result.code === 0) {
+            wx.showToast({ title: '已取消' })
+            this.loadStudents()
+          } else {
+            wx.showToast({ title: result.msg, icon: 'none' })
+          }
+        }
+      }
+    })
+  },
   showQrGuide() { this.setData({ showQrModal: true }) },
   closeQrGuide() { this.setData({ showQrModal: false }) },
   stopProp() {},

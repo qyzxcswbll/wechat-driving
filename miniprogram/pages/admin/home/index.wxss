@@ -15,3 +15,9 @@
 .menu-icon { font-size: 48rpx; margin-bottom: 12rpx; }
 .menu-label { font-size: 24rpx; color: #085041; }
 .notify-bar { margin-top: 32rpx; padding: 28rpx; background: #fff; border: 2rpx solid #e8e8e8; border-radius: 20rpx; text-align: center; }
+.setup-card { margin-top: 24rpx; padding: 32rpx; background: #fff; border: 2rpx solid #e8e8e8; border-radius: 20rpx; display: flex; align-items: center; gap: 20rpx; }
+.setup-icon { font-size: 40rpx; }
+.setup-text { flex: 1; }
+.setup-title { font-size: 28rpx; color: #333; font-weight: 500; }
+.setup-desc { font-size: 22rpx; color: #999; margin-top: 4rpx; }
+.setup-arrow { font-size: 36rpx; color: #ccc; }

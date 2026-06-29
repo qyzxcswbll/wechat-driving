@@ -3,14 +3,7 @@ const app = getApp()
 Page({
   data: { nickName: '', gender: '先生', phone: '', remark: '', agreed: false },
   onLoad() {
-    const ui = app.globalData.userInfo
-    if (ui) {
-      this.setData({
-        nickName: ui.nickName || ui.studentName || '',
-        gender: ui.gender || '先生',
-        phone: ui.phone || ''
-      })
-    }
+    // 让用户自己填写，不预填任何数据
   },
   setGender(e) { this.setData({ gender: e.currentTarget.dataset.val }) },
   onNameInput(e) { this.setData({ nickName: e.detail.value }) },
@@ -20,10 +13,11 @@ Page({
   openPrivacy() { wx.navigateTo({ url: '/pages/privacy/index' }) },
 
   submit() {
+    if (!this.data.nickName) return wx.showToast({ title: '请输入称呼', icon: 'none' })
     if (!this.data.phone) return wx.showToast({ title: '请输入手机号', icon: 'none' })
     if (!this.data.agreed) return wx.showToast({ title: '请先阅读并同意隐私政策', icon: 'none' })
 
-    const nickName = this.data.nickName || app.globalData.userInfo?.nickName || '学员'
+    const nickName = this.data.nickName
 
     // 先弹通知授权
     wx.requestSubscribeMessage({
@@ -59,4 +53,7 @@ Page({
       }
     })
   }
-,onShareAppMessage(){},onShareTimeline(){}})
+,
+  onShareAppMessage(){return{title:"轻松上路 - 预约参观"}},
+  onShareTimeline(){return{title:"轻松上路 - 预约参观"}}
+})

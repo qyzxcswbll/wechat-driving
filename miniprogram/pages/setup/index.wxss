@@ -1,16 +1,16 @@
-.card { background: #fff; border-radius: 24rpx; padding: 32rpx; border: 2rpx solid #e8e8e8; width: 100%; box-sizing: border-box; }
-.field { margin-bottom: 32rpx; width: 100%; }
-.field-label { font-size: 24rpx; color: #888; margin-bottom: 12rpx; }
-.field-input { background: #fff; border: 2rpx solid #ddd; border-radius: 16rpx; padding: 28rpx 28rpx; font-size: 28rpx; color: #333; display: block; width: 100%; box-sizing: border-box; min-height: 88rpx; }
-.sect-title { font-size: 30rpx; font-weight: 500; color: #333; margin-bottom: 8rpx; }
-.btn-primary { background: #534AB7; color: #fff; padding: 28rpx; border-radius: 20rpx; text-align: center; font-size: 30rpx; font-weight: 500; width: 100%; border: none; display: block; box-sizing: border-box; min-height: 88rpx; margin-top: 16rpx; }
+.card { background: #fff; border-radius: 22rpx; padding: 28rpx; border: 2rpx solid #e8e8e8; width: 100%; box-sizing: border-box; }
+.field { margin-bottom: 28rpx; width: 100%; }
+.field-label { font-size: 24rpx; color: #888; margin-bottom: 10rpx; }
+.field-input { background: #fff; border: 2rpx solid #ddd; border-radius: 14rpx; padding: 24rpx 24rpx; font-size: 28rpx; color: #333; display: block; width: 100%; box-sizing: border-box; min-height: 76rpx; }
+.sect-title { font-size: 28rpx; font-weight: 500; color: #333; margin-bottom: 8rpx; }
+.btn-primary { background: #534AB7; color: #fff; padding: 22rpx; border-radius: 16rpx; text-align: center; font-size: 28rpx; font-weight: 500; width: 100%; border: none; display: block; box-sizing: border-box; min-height: 72rpx; margin-top: 16rpx; }
 .btn-primary::after { border: none; }
-.set-btn { background: #E1F5EE; color: #0F6E56; padding: 12rpx 28rpx; border-radius: 12rpx; font-size: 24rpx; font-weight: 500; flex-shrink: 0; }
-.remove-btn { background: #FAEEDA; color: #BA7517; padding: 12rpx 28rpx; border-radius: 12rpx; font-size: 24rpx; font-weight: 500; flex-shrink: 0; }
-.load-more { text-align: center; padding: 24rpx; font-size: 24rpx; color: #534AB7; margin-top: 8rpx; }
-.upload-btn { background: #f0f0f0; color: #555; padding: 16rpx 24rpx; border-radius: 12rpx; font-size: 24rpx; border: none; flex-shrink: 0; }
+.set-btn { background: #E1F5EE; color: #0F6E56; padding: 10rpx 24rpx; border-radius: 12rpx; font-size: 22rpx; font-weight: 500; flex-shrink: 0; }
+.remove-btn { background: #FAEEDA; color: #BA7517; padding: 10rpx 24rpx; border-radius: 12rpx; font-size: 22rpx; font-weight: 500; flex-shrink: 0; }
+.load-more { text-align: center; padding: 20rpx; font-size: 24rpx; color: #534AB7; margin-top: 8rpx; }
+.upload-btn { background: #f0f0f0; color: #555; padding: 14rpx 20rpx; border-radius: 12rpx; font-size: 22rpx; border: none; flex-shrink: 0; }
 .upload-btn::after { border: none; }
-.q-help { font-size: 28rpx; margin-left: 8rpx; }
+.q-help { font-size: 26rpx; margin-left: 8rpx; }
 
 /* 弹窗 */
 .modal-mask { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,.4); z-index: 999; display: flex; align-items: center; justify-content: center; }

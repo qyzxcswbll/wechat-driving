@@ -4,12 +4,16 @@ const db = cloud.database()
 
 exports.main = async (event) => {
   const { limit = 20, offset = 0 } = event
+  const dbCmd = db.command
   const res = await db.collection('students')
+    .where({ phone: dbCmd.neq('').and(dbCmd.exists(true)) })
     .orderBy('createdAt', 'desc')
     .skip(offset)
     .limit(limit)
     .get()
   // 获取总数
-  const countRes = await db.collection('students').count()
+  const countRes = await db.collection('students')
+    .where({ phone: dbCmd.neq('').and(dbCmd.exists(true)) })
+    .count()
   return { code: 0, data: res.data, total: countRes.total }
 }

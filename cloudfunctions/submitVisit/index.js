@@ -12,7 +12,7 @@ exports.main = async (event) => {
   const { phone, remark } = event
   if (!phone) return { code: -1, msg: '手机号不能为空' }
 
-  // 保存学员联系方式到学员档案
+  // 保存学员联系方式到学员档案（不存在则创建）
   try {
     const studentRes = await db.collection('students').where({ openid: OPENID }).get()
     if (studentRes.data.length > 0) {
@@ -21,6 +21,19 @@ exports.main = async (event) => {
       if (event.gender) updateData.gender = event.gender
       if (event.nickName) updateData.nickName = event.nickName
       await db.collection('students').doc(studentRes.data[0]._id).update({ data: updateData })
+    } else {
+      // 首次提交参观，创建学员记录
+      await db.collection('students').add({
+        data: {
+          openid: OPENID,
+          nickName: event.nickName || '',
+          studentName: event.studentName || '',
+          gender: event.gender || '先生',
+          phone,
+          createdAt: db.serverDate(),
+          lastVisit: db.serverDate()
+        }
+      })
     }
   } catch (e) {
     console.error('更新学员档案失败', e)

@@ -4,14 +4,16 @@
     <view class="hero-sub">专业驾驶培训</view>
   </view>
 
-  <view class="info-card">
-    <view class="info-row"><text class="info-label">📍 地址</text><text class="info-val">{{schoolInfo.address}}</text></view>
-    <view class="info-row"><text class="info-label">👨‍🏫 教练</text><text class="info-val">{{schoolInfo.coachName}}</text></view>
-    <view class="info-row"><text class="info-label">📞 电话</text><text class="info-val">{{schoolInfo.phone}}</text></view>
-    <view class="info-row" wx:if="{{schoolInfo.intro}}"><text class="info-label">📖 简介</text><text class="info-val">{{schoolInfo.intro}}</text></view>
+  <view class="info-card section-card">
+    <view class="section-title">📍 驾校信息</view>
+    <view class="info-row"><text class="info-label">地址</text><text class="info-val">{{schoolInfo.address}}</text></view>
+    <view class="info-row"><text class="info-label">教练</text><text class="info-val">{{schoolInfo.coachName}}</text></view>
+    <view class="info-row"><text class="info-label">电话</text><text class="info-val">{{schoolInfo.phone}}</text></view>
+    <view class="info-row" wx:if="{{schoolInfo.intro}}"><text class="info-label">简介</text><text class="info-val">{{schoolInfo.intro}}</text></view>
   </view>
 
-  <view class="menu-grid">
+  <view class="menu-section">
+    <view class="menu-grid">
     <view class="menu-item" bindtap="goTo" data-url="../school/index">
       <text class="menu-icon">📋</text>
       <text class="menu-label">了解驾校</text>
@@ -28,6 +30,7 @@
       <text class="menu-icon">💬</text>
       <text class="menu-label">联系我们</text>
     </view>
+  </view>
   </view>
   <view class="setup-entry" bindtap="goSetup">⚙️</view>
 </view>

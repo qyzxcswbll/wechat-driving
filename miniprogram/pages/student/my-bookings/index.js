@@ -40,4 +40,7 @@ Page({
       wx.showToast({ title: result.msg || '取消失败', icon: 'none' })
     }
   }
-,onShareAppMessage(){},onShareTimeline(){}})
+,
+  onShareAppMessage(){return{title:"轻松上路 - 我的预约"}},
+  onShareTimeline(){return{title:"轻松上路 - 我的预约"}}
+})

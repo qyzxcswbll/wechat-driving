@@ -2,12 +2,12 @@ const cloud = require('../../utils/cloud')
 
 Page({
   data: {
-    authed: false, showQrModal: false,
+    authed: false, showQrModal: false, showMapModal: false,
     password: '',
     students: [], studentTotal: 0, studentOffset: 0,
     setMsg: '',
     saveMsg: '',
-    form: { name: '', phone: '', schoolName: '', address: '', intro: '', wechatQR: '' }
+    form: { name: '', phone: '', schoolName: '', address: '', intro: '', wechatQR: '', wechatId: '', latitude: '', longitude: '' }
   },
   onPwdInput(e) { this.setData({ password: e.detail.value }) },
   onFormInput(e) {
@@ -75,7 +75,10 @@ Page({
           schoolName: res.data.schoolName || '',
           address: res.data.address || '',
           intro: res.data.intro || '',
-          wechatQR: res.data.wechatQR || ''
+          wechatQR: res.data.wechatQR || '',
+          wechatId: res.data.wechatId || '',
+          latitude: res.data.latitude || '',
+          longitude: res.data.longitude || ''
         }
       })
     }
@@ -125,6 +128,8 @@ Page({
   },
   showQrGuide() { this.setData({ showQrModal: true }) },
   closeQrGuide() { this.setData({ showQrModal: false }) },
+  showMapGuide() { this.setData({ showMapModal: true }) },
+  closeMapGuide() { this.setData({ showMapModal: false }) },
   stopProp() {},
   async chooseImage() {
     wx.chooseImage({
@@ -155,4 +160,7 @@ Page({
     this.setData({ saveMsg: res.msg })
     if (res.code === 0) wx.showToast({ title: '已保存' })
   }
-,onShareAppMessage(){},onShareTimeline(){}})
+,
+  onShareAppMessage(){return{title:"轻松上路 - 管理后台"}},
+  onShareTimeline(){return{title:"轻松上路 - 管理后台"}}
+})

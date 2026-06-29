@@ -11,4 +11,7 @@ Page({
       }
     })
   }
-,onShareAppMessage(){},onShareTimeline(){}})
+,
+  onShareAppMessage(){return{title:"轻松上路 - 预约详情"}},
+  onShareTimeline(){return{title:"轻松上路 - 预约详情"}}
+})

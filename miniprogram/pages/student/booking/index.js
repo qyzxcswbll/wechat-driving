@@ -26,14 +26,7 @@ Page({
     agreed: false
   },
   onLoad() {
-    const ui = app.globalData.userInfo
-    if (ui) {
-      this.setData({
-        nickName: ui.nickName || ui.studentName || '',
-        gender: ui.gender || '先生',
-        phone: ui.phone || ''
-      })
-    }
+    // 让用户自己填写，不预填任何数据
   },
   setSubject(e) { this.setData({ subject: e.currentTarget.dataset.val }) },
   setGear(e) { this.setData({ gear: e.currentTarget.dataset.val }) },
@@ -73,6 +66,7 @@ Page({
     this.setData({ slots })
   },
   async submit() {
+    if (!this.data.nickName) return wx.showToast({ title: '请输入称呼', icon: 'none' })
     if (!this.data.phone) return wx.showToast({ title: '请输入手机号', icon: 'none' })
     if (!this.data.agreed) return wx.showToast({ title: '请先阅读并同意隐私政策', icon: 'none' })
     const validSlots = this.data.slots.filter(s => s.date && s.time)
@@ -80,7 +74,7 @@ Page({
       return wx.showToast({ title: '请至少填写一个日期和时间', icon: 'none' })
     }
 
-    const nickName = this.data.nickName || app.globalData.userInfo?.nickName || '学员'
+    const nickName = this.data.nickName
 
     // 先申请订阅权限（必须在手势上下文中同步调用）
     wx.requestSubscribeMessage({
@@ -115,4 +109,7 @@ Page({
       }
     })
   }
-,onShareAppMessage(){},onShareTimeline(){}})
+,
+  onShareAppMessage(){return{title:"轻松上路 - 在线预约"}},
+  onShareTimeline(){return{title:"轻松上路 - 在线预约"}}
+})

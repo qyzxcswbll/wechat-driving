@@ -16,27 +16,16 @@ exports.main = async (event) => {
     return { code: 0, data: { isAdmin: true, userInfo: adminRes.data[0] } }
   }
 
-  // 查找或创建学员记录
-  let user = await students.where({ openid: OPENID }).get()
-  if (user.data.length === 0) {
-    const result = await students.add({
-      data: {
-        openid: OPENID,
-        nickName: event.nickName || '',
-        studentName: event.studentName || '',
-        gender: event.gender || '先生',
-        avatarUrl: event.avatarUrl || '',
-        phone: event.phone || '',
-        createdAt: db.serverDate(),
-        lastVisit: db.serverDate()
-      }
+  // 查找已有学员记录（不创建，等提交参观/预约时再建）
+  const user = await students.where({ openid: OPENID }).get()
+  if (user.data.length > 0) {
+    // 更新最近访问
+    await students.doc(user.data[0]._id).update({
+      data: { lastVisit: db.serverDate(), nickName: event.nickName || '', avatarUrl: event.avatarUrl || '' }
     })
-    return { code: 0, data: { isAdmin: false, userInfo: { _id: result._id, openid: OPENID, nickName: event.nickName, avatarUrl: event.avatarUrl, phone: event.phone || '', studentName: '', gender: '先生' } } }
+    return { code: 0, data: { isAdmin: false, userInfo: user.data[0] } }
   }
 
-  // 更新最近访问
-  await students.doc(user.data[0]._id).update({
-    data: { lastVisit: db.serverDate(), nickName: event.nickName, avatarUrl: event.avatarUrl }
-  })
-  return { code: 0, data: { isAdmin: false, userInfo: user.data[0] } }
+  // 纯登录不创建记录，返回基本身份信息
+  return { code: 0, data: { isAdmin: false, userInfo: { openid: OPENID, nickName: '', avatarUrl: '', phone: '', studentName: '', gender: '先生' } } }
 }

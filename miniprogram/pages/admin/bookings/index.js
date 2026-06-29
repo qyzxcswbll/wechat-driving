@@ -111,4 +111,7 @@ Page({
     })
   },
   callPhone(e) { wx.makePhoneCall({ phoneNumber: e.currentTarget.dataset.phone }) }
-,onShareAppMessage(){},onShareTimeline(){}})
+,
+  onShareAppMessage(){return{title:"轻松上路 - 管理后台"}},
+  onShareTimeline(){return{title:"轻松上路 - 管理后台"}}
+})

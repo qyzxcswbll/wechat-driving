@@ -1,9 +1,9 @@
 <view class="page">
   <view class="card">
     <view class="field">
-      <view class="field-label">称呼（选填）</view>
+      <view class="field-label">称呼 <text class="required">*</text></view>
       <view class="name-row">
-        <input class="name-input" placeholder="您的昵称（默认使用微信昵称）" value="{{nickName}}" bindinput="onNameInput" />
+        <input class="name-input" placeholder="您的昵称" value="{{nickName}}" bindinput="onNameInput" />
         <view class="gender-tag {{gender==='先生'?'on':''}}" bindtap="setGender" data-val="先生">先生</view>
         <view class="gender-tag {{gender==='女士'?'on':''}}" bindtap="setGender" data-val="女士">女士</view>
       </view>

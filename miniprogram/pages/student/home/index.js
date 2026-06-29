@@ -18,4 +18,7 @@ Page({
   },
   goTo(e) { wx.navigateTo({ url: e.currentTarget.dataset.url }) },
   goSetup() { wx.navigateTo({ url: '/pages/setup/index' }) }
-,onShareAppMessage(){},onShareTimeline(){}})
+,
+  onShareAppMessage(){return{title:"轻松上路 - 一键预约学车"}},
+  onShareTimeline(){return{title:"轻松上路 - 一键预约学车"}}
+})

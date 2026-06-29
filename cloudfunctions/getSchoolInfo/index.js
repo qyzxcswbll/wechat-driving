@@ -14,7 +14,10 @@ exports.main = async () => {
       intro: admin.intro,
       coachName: admin.name,
       phone: admin.phone,
-      wechatQR: admin.wechatQR
+      wechatQR: admin.wechatQR,
+      wechatId: admin.wechatId || '',
+      latitude: admin.latitude,
+      longitude: admin.longitude
     }
   }
 }

@@ -9,5 +9,6 @@
   </view>
   <view class="card">
     <view class="btn-call" bindtap="callPhone" data-phone="{{info.phone}}">📞 拨打电话</view>
+    <view wx:if="{{info.latitude && info.longitude}}" class="btn-map" bindtap="openMap">📍 导航到这里</view>
   </view>
 </view>

@@ -13,7 +13,7 @@ exports.main = async (event) => {
 
   if (!bookings || bookings.length === 0) return { code: -1, msg: '请至少选择一个日期' }
 
-  // 保存学员的联系方式到学员档案
+  // 保存学员的联系方式到学员档案（不存在则创建）
   if (event.phone) {
     try {
       const studentRes = await db.collection('students').where({ openid: OPENID }).get()
@@ -24,6 +24,19 @@ exports.main = async (event) => {
             studentName: event.studentName || '',
             gender: event.gender || '先生',
             nickName: event.nickName || '',
+            lastVisit: db.serverDate()
+          }
+        })
+      } else {
+        // 首次提交预约，创建学员记录
+        await db.collection('students').add({
+          data: {
+            openid: OPENID,
+            nickName: event.nickName || '',
+            studentName: event.studentName || '',
+            gender: event.gender || '先生',
+            phone: event.phone,
+            createdAt: db.serverDate(),
             lastVisit: db.serverDate()
           }
         })

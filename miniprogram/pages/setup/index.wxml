@@ -63,6 +63,17 @@
           <button class="upload-btn" bindtap="chooseImage">上传</button>
         </view>
       </view>
+      <view class="field">
+        <view class="field-label">微信号</view>
+        <input class="field-input" value="{{form.wechatId}}" bindinput="onFormInput" data-field="wechatId" placeholder="填写微信号，学员可一键复制" />
+      </view>
+      <view class="field">
+        <view class="field-label">地图坐标 <text class="q-help" bindtap="showMapGuide">❔</text></view>
+        <view style="display:flex;gap:16rpx;">
+          <input class="field-input" style="flex:1;" value="{{form.latitude}}" bindinput="onFormInput" data-field="latitude" placeholder="纬度(选填)" type="digit" />
+          <input class="field-input" style="flex:1;" value="{{form.longitude}}" bindinput="onFormInput" data-field="longitude" placeholder="经度(选填)" type="digit" />
+        </view>
+      </view>
       <button class="btn-primary" bindtap="saveSchool" style="margin-top:16rpx;">保存驾校信息</button>
       <view wx:if="{{saveMsg}}" style="margin-top:16rpx;font-size:24rpx;color:#0F6E56;">{{saveMsg}}</view>
     </view>
@@ -99,6 +110,35 @@
         </view>
       </view>
       <view class="modal-close" bindtap="closeQrGuide">知道了</view>
+    </view>
+  </view>
+
+  <!-- 地图坐标教程弹窗 -->
+  <view wx:if="{{showMapModal}}" class="modal-mask" bindtap="closeMapGuide">
+    <view class="modal-box" catchtap="stopProp">
+      <view class="modal-hd">📍 如何获取地图坐标</view>
+      <view class="modal-body">
+        <view class="qr-step">
+          <text class="qr-step-num">1</text>
+          <text class="qr-step-text">打开高德/百度地图，搜索驾校位置</text>
+        </view>
+        <view class="qr-step">
+          <text class="qr-step-num">2</text>
+          <text class="qr-step-text">点击左下角「 ❔ 定位」查看当前位置</text>
+        </view>
+        <view class="qr-step">
+          <text class="qr-step-num">3</text>
+          <text class="qr-step-text">截图获取显示的经纬度数值</text>
+        </view>
+        <view class="qr-step">
+          <text class="qr-step-num">4</text>
+          <text class="qr-step-text">纬度填入左侧，经度填入右侧</text>
+        </view>
+        <view style="font-size:24rpx;color:#888;margin-top:24rpx;padding:16rpx;background:#f8f8f8;border-radius:12rpx;">
+          💡 填了坐标后，学员端「了解驾校」可一键查看地图位置
+        </view>
+      </view>
+      <view class="modal-close" bindtap="closeMapGuide">知道了</view>
     </view>
   </view>
 </view>

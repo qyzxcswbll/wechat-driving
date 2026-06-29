@@ -106,4 +106,7 @@ Page({
   dateStr(d) {
     return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0')
   }
-,onShareAppMessage(){},onShareTimeline(){}})
+,
+  onShareAppMessage(){return{title:"轻松上路 - 管理后台"}},
+  onShareTimeline(){return{title:"轻松上路 - 管理后台"}}
+})

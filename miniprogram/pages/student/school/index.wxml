@@ -15,4 +15,8 @@
     <view class="btn-primary" bindtap="callPhone" data-phone="{{info.phone}}">📞 拨打电话</view>
     <view class="btn-secondary" bindtap="goVisit">📋 预约参观</view>
   </view>
+  <view wx:if="{{info.latitude && info.longitude}}" class="map-bar" bindtap="openMap">
+    <text>📍 查看地图</text>
+    <text style="font-size:24rpx;color:#999;">导航到驾校 ›</text>
+  </view>
 </view>

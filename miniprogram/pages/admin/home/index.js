@@ -28,4 +28,7 @@ Page({
   },
   goTo(e) { wx.redirectTo({ url: e.currentTarget.dataset.url }) },
   goSetup() { wx.navigateTo({ url: '/pages/setup/index' }) }
-,onShareAppMessage(){},onShareTimeline(){}})
+,
+  onShareAppMessage(){return{title:"轻松上路 - 管理后台"}},
+  onShareTimeline(){return{title:"轻松上路 - 管理后台"}}
+})

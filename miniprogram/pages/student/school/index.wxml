@@ -3,8 +3,8 @@
     <view class="hero-title">🚗 {{info.schoolName}}</view>
     <view class="hero-sub">{{info.coachName}} · {{info.phone}}</view>
   </view>
-  <view class="card">
-    <view class="section-title">📍 地址</view>
+  <view class="card" bindtap="openMap" style="{{info.latitude?'cursor:pointer':''}}">
+    <view class="section-title">📍 地址 <text wx:if="{{info.latitude}}" style="font-size:22rpx;color:#534AB7;font-weight:400;">导航 ›</text></view>
     <text class="body-text">{{info.address}}</text>
   </view>
   <view class="card">
@@ -14,9 +14,5 @@
   <view class="btn-row">
     <view class="btn-primary" bindtap="callPhone" data-phone="{{info.phone}}">📞 拨打电话</view>
     <view class="btn-secondary" bindtap="goVisit">📋 预约参观</view>
-  </view>
-  <view wx:if="{{info.latitude && info.longitude}}" class="map-bar" bindtap="openMap">
-    <text>📍 查看地图</text>
-    <text style="font-size:24rpx;color:#999;">导航到驾校 ›</text>
   </view>
 </view>

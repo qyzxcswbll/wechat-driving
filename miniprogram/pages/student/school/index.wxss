@@ -8,4 +8,3 @@
 .btn-row { display: flex; gap: 20rpx; }
 .btn-primary { flex: 1; background: #534AB7; color: #fff; padding: 28rpx; border-radius: 20rpx; text-align: center; font-size: 28rpx; font-weight: 500; }
 .btn-secondary { flex: 1; background: #fff; color: #534AB7; padding: 28rpx; border-radius: 20rpx; text-align: center; font-size: 28rpx; font-weight: 500; border: 3rpx solid #CECBF6; }
-.map-bar { margin-top: 20rpx; padding: 28rpx 32rpx; background: #fff; border: 2rpx solid #e8e8e8; border-radius: 20rpx; display: flex; align-items: center; justify-content: space-between; }

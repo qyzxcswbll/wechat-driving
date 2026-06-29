@@ -115,4 +115,4 @@ Page({
       }
     })
   }
-})
+,onShareAppMessage(){},onShareTimeline(){}})

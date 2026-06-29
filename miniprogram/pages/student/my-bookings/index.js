@@ -40,4 +40,4 @@ Page({
       wx.showToast({ title: result.msg || '取消失败', icon: 'none' })
     }
   }
-})
+,onShareAppMessage(){},onShareTimeline(){}})

@@ -28,4 +28,4 @@ Page({
   },
   goTo(e) { wx.redirectTo({ url: e.currentTarget.dataset.url }) },
   goSetup() { wx.navigateTo({ url: '/pages/setup/index' }) }
-})
+,onShareAppMessage(){},onShareTimeline(){}})

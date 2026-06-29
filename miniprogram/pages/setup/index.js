@@ -155,4 +155,4 @@ Page({
     this.setData({ saveMsg: res.msg })
     if (res.code === 0) wx.showToast({ title: '已保存' })
   }
-})
+,onShareAppMessage(){},onShareTimeline(){}})

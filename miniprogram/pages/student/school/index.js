@@ -6,4 +6,4 @@ Page({
   },
   callPhone(e) { wx.makePhoneCall({ phoneNumber: e.currentTarget.dataset.phone }) },
   goVisit() { wx.navigateTo({ url: '../visit/index' }) }
-})
+,onShareAppMessage(){},onShareTimeline(){}})

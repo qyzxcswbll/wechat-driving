@@ -8,4 +8,4 @@ Page({
   copyWechat() {
     wx.setClipboardData({ data: this.data.info.schoolName + '教练微信' })
   }
-})
+,onShareAppMessage(){},onShareTimeline(){}})

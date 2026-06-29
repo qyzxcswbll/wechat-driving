@@ -16,10 +16,21 @@ App({
   },
   async checkAuth() {
     try {
-      const res = await cloud.login({
-        nickName: this.globalData.userInfo?.nickName || '',
-        avatarUrl: this.globalData.userInfo?.avatarUrl || ''
-      })
+      // 尝试获取微信昵称（首次登录填充默认值）
+      let nickName = this.globalData.userInfo?.nickName || ''
+      let avatarUrl = this.globalData.userInfo?.avatarUrl || ''
+      if (!nickName) {
+        try {
+          const info = await wx.getUserInfo({ withCredentials: false })
+          if (info && info.userInfo && info.userInfo.nickName) {
+            nickName = info.userInfo.nickName
+            avatarUrl = info.userInfo.avatarUrl || ''
+          }
+        } catch (e) {
+          // 获取不到走默认值
+        }
+      }
+      const res = await cloud.login({ nickName, avatarUrl })
       if (res.code === 0) {
         this.globalData.isAdmin = res.data.isAdmin
         this.globalData.userInfo = res.data.userInfo

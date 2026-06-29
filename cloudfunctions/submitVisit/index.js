@@ -19,6 +19,7 @@ exports.main = async (event) => {
       const updateData = { phone, lastVisit: db.serverDate() }
       if (event.studentName) updateData.studentName = event.studentName
       if (event.gender) updateData.gender = event.gender
+      if (event.nickName) updateData.nickName = event.nickName
       await db.collection('students').doc(studentRes.data[0]._id).update({ data: updateData })
     }
   } catch (e) {

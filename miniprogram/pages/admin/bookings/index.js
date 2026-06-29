@@ -111,4 +111,4 @@ Page({
     })
   },
   callPhone(e) { wx.makePhoneCall({ phoneNumber: e.currentTarget.dataset.phone }) }
-})
+,onShareAppMessage(){},onShareTimeline(){}})

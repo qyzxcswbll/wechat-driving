@@ -23,6 +23,7 @@ exports.main = async (event) => {
             phone: event.phone,
             studentName: event.studentName || '',
             gender: event.gender || '先生',
+            nickName: event.nickName || '',
             lastVisit: db.serverDate()
           }
         })
